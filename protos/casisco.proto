@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package casisco;
+
+service Casisco
+{
+	rpc registerUser(UserRegisterInfo)returns (UserRegisterStatus) {}
+};
+
+
+message UserRegisterInfo
+{
+	string name = 1;
+	string password = 2;
+	string email = 3;
+};
+
+message UserRegisterStatus
+{
+	enum Status
+	{
+		ok = 0;
+		nameTaken = 1;
+		emailTaken = 2;
+	};
+
+	Status status = 1;
+};
