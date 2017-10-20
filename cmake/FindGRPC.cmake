@@ -51,6 +51,8 @@ function(GRPC_GENERATE_CPP SRCS HDRS DEST)
 
   set(${SRCS})
   set(${HDRS})
+  set(MOCKS_SRC_DIR "${PROTO_SRC_DIR}/mocks")
+  file(MAKE_DIRECTORY ${MOCKS_SRC_DIR})
   foreach(FIL ${ARGN})
     get_filename_component(ABS_FIL ${FIL} ABSOLUTE)
     get_filename_component(FIL_WE ${FIL} NAME_WE)
@@ -62,7 +64,7 @@ function(GRPC_GENERATE_CPP SRCS HDRS DEST)
       OUTPUT "${DEST}/${FIL_WE}.grpc.pb.cc"
              "${DEST}/${FIL_WE}.grpc.pb.h"
       COMMAND protobuf::protoc
-      ARGS --grpc_out ${DEST} ${_protobuf_include_path} --plugin=protoc-gen-grpc=${GRPC_CPP_PLUGIN} ${ABS_FIL}
+      ARGS ${_protobuf_include_path} --plugin=protoc-gen-grpc=${GRPC_CPP_PLUGIN} ${ABS_FIL} --grpc_out=generate_mock_code=true:${DEST}
       DEPENDS ${ABS_FIL} protobuf::protoc gRPC::grpc_cpp_plugin
       COMMENT "Running C++ gRPC compiler on ${FIL}"
       VERBATIM )

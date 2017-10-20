@@ -20,6 +20,8 @@ set(PROTO_SRC_DIR ${CMAKE_CURRENT_BINARY_DIR}/proto-src)
 file(MAKE_DIRECTORY ${PROTO_SRC_DIR})
 include_directories(${PROTO_SRC_DIR})
 
+include_directories(src/)
+
 add_subdirectory(src)
 add_subdirectory(test)
 
