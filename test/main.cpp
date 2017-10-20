@@ -1,4 +1,5 @@
 #include <gmock/gmock.h>
+#include "server/Server.hpp"
 
 int main (int argc, char** argv)
 {
