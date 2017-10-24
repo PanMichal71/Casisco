@@ -9,6 +9,11 @@ namespace requestHandler
 
 class IHandler
 {
+public:
+    virtual ~IHandler() = default;
+
+    virtual bool process() = 0;
+
 
 };
 

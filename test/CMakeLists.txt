@@ -11,4 +11,4 @@ message(${gmock_SOURCE_DIR})
 include(Sources.cmake)
 
 add_executable(tests.out main.cpp ${TESTS_SRC})
-target_link_libraries(tests.out gtest gmock )
+target_link_libraries(tests.out gtest gmock CASISCO)

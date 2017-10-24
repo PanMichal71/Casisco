@@ -1,4 +1,8 @@
 #include "Server.hpp"
+#include "requestHandler/LoginUser.hpp"
+
+#include <iostream>
+#include <thread>
 
 namespace casisco
 {
@@ -21,6 +25,19 @@ Server::~Server()
     completionQueue_->Shutdown();
 }
 
+void Server::run()
+{
+    new requestHandler::LoginUser (&service_, completionQueue_.get());
+    void* tag;
+    bool ok;
+
+    while(true)
+    {
+        GPR_ASSERT(completionQueue_->Next(&tag, &ok));
+        GPR_ASSERT(ok);
+        static_cast<requestHandler::LoginUser*>(tag)->process();
+    }
+}
 
 } // server
 } // casisco
