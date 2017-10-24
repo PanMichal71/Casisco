@@ -12,6 +12,9 @@ def run():
   response = stub.registerUser(casisco_pb2.UserRegisterInfo(name="dupa", password="dupa_password", email="dupa@mail.com"))
   print("Greeter client received: {}".format(response.status))
 
+  response = stub.loginUser(casisco_pb2.UserLoginInfo(name="dupa", password="dupa_password"))
+  print("Greeter client received: {}".format(response.status))
+
 
 if __name__ == '__main__':
   run()

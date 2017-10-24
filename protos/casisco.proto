@@ -4,7 +4,8 @@ package casisco;
 
 service Casisco
 {
-	rpc registerUser(UserRegisterInfo)returns (UserRegisterStatus) {}
+	rpc registerUser(UserRegisterInfo) returns (UserRegisterStatus) {}
+	rpc loginUser(UserLoginInfo) returns (UserLoginStatus) {}
 };
 
 
@@ -22,6 +23,24 @@ message UserRegisterStatus
 		ok = 0;
 		nameTaken = 1;
 		emailTaken = 2;
+	};
+
+	Status status = 1;
+};
+
+message UserLoginInfo
+{
+	string name = 1;
+	string password = 2;
+};
+
+message UserLoginStatus
+{
+	enum Status
+	{
+		ok = 0;
+		invalidPassword = 1;
+		noSuchUser = 2;
 	};
 
 	Status status = 1;

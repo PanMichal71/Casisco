@@ -1,5 +1,6 @@
 #include "Server.hpp"
 #include "requestHandler/LoginUser.hpp"
+#include "requestHandler/RegisterUser.hpp"
 
 #include <iostream>
 #include <thread>
@@ -28,14 +29,15 @@ Server::~Server()
 void Server::run()
 {
     new requestHandler::LoginUser (&service_, completionQueue_.get());
+    new requestHandler::RegisterUser(&service_, completionQueue_.get());
     void* tag;
     bool ok;
-
+    std::cout << "Listening.."<<std::endl;
     while(true)
     {
         GPR_ASSERT(completionQueue_->Next(&tag, &ok));
         GPR_ASSERT(ok);
-        static_cast<requestHandler::LoginUser*>(tag)->process();
+        static_cast<requestHandler::IHandler*>(tag)->process();
     }
 }
 

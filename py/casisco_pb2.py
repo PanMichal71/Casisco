@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='casisco.proto',
   package='casisco',
   syntax='proto3',
-  serialized_pb=_b('\n\rcasisco.proto\x12\x07\x63\x61sisco\"A\n\x10UserRegisterInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\"y\n\x12UserRegisterStatus\x12\x32\n\x06status\x18\x01 \x01(\x0e\x32\".casisco.UserRegisterStatus.Status\"/\n\x06Status\x12\x06\n\x02ok\x10\x00\x12\r\n\tnameTaken\x10\x01\x12\x0e\n\nemailTaken\x10\x02\x32S\n\x07\x43\x61sisco\x12H\n\x0cregisterUser\x12\x19.casisco.UserRegisterInfo\x1a\x1b.casisco.UserRegisterStatus\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\rcasisco.proto\x12\x07\x63\x61sisco\"A\n\x10UserRegisterInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\"y\n\x12UserRegisterStatus\x12\x32\n\x06status\x18\x01 \x01(\x0e\x32\".casisco.UserRegisterStatus.Status\"/\n\x06Status\x12\x06\n\x02ok\x10\x00\x12\r\n\tnameTaken\x10\x01\x12\x0e\n\nemailTaken\x10\x02\"/\n\rUserLoginInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"y\n\x0fUserLoginStatus\x12/\n\x06status\x18\x01 \x01(\x0e\x32\x1f.casisco.UserLoginStatus.Status\"5\n\x06Status\x12\x06\n\x02ok\x10\x00\x12\x13\n\x0finvalidPassword\x10\x01\x12\x0e\n\nnoSuchUser\x10\x02\x32\x94\x01\n\x07\x43\x61sisco\x12H\n\x0cregisterUser\x12\x19.casisco.UserRegisterInfo\x1a\x1b.casisco.UserRegisterStatus\"\x00\x12?\n\tloginUser\x12\x16.casisco.UserLoginInfo\x1a\x18.casisco.UserLoginStatus\"\x00\x62\x06proto3')
 )
 
 
@@ -49,6 +49,32 @@ _USERREGISTERSTATUS_STATUS = _descriptor.EnumDescriptor(
   serialized_end=214,
 )
 _sym_db.RegisterEnumDescriptor(_USERREGISTERSTATUS_STATUS)
+
+_USERLOGINSTATUS_STATUS = _descriptor.EnumDescriptor(
+  name='Status',
+  full_name='casisco.UserLoginStatus.Status',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='ok', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='invalidPassword', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='noSuchUser', index=2, number=2,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=333,
+  serialized_end=386,
+)
+_sym_db.RegisterEnumDescriptor(_USERLOGINSTATUS_STATUS)
 
 
 _USERREGISTERINFO = _descriptor.Descriptor(
@@ -127,10 +153,84 @@ _USERREGISTERSTATUS = _descriptor.Descriptor(
   serialized_end=214,
 )
 
+
+_USERLOGININFO = _descriptor.Descriptor(
+  name='UserLoginInfo',
+  full_name='casisco.UserLoginInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='casisco.UserLoginInfo.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='password', full_name='casisco.UserLoginInfo.password', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=216,
+  serialized_end=263,
+)
+
+
+_USERLOGINSTATUS = _descriptor.Descriptor(
+  name='UserLoginStatus',
+  full_name='casisco.UserLoginStatus',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='status', full_name='casisco.UserLoginStatus.status', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _USERLOGINSTATUS_STATUS,
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=265,
+  serialized_end=386,
+)
+
 _USERREGISTERSTATUS.fields_by_name['status'].enum_type = _USERREGISTERSTATUS_STATUS
 _USERREGISTERSTATUS_STATUS.containing_type = _USERREGISTERSTATUS
+_USERLOGINSTATUS.fields_by_name['status'].enum_type = _USERLOGINSTATUS_STATUS
+_USERLOGINSTATUS_STATUS.containing_type = _USERLOGINSTATUS
 DESCRIPTOR.message_types_by_name['UserRegisterInfo'] = _USERREGISTERINFO
 DESCRIPTOR.message_types_by_name['UserRegisterStatus'] = _USERREGISTERSTATUS
+DESCRIPTOR.message_types_by_name['UserLoginInfo'] = _USERLOGININFO
+DESCRIPTOR.message_types_by_name['UserLoginStatus'] = _USERLOGINSTATUS
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 UserRegisterInfo = _reflection.GeneratedProtocolMessageType('UserRegisterInfo', (_message.Message,), dict(
@@ -147,6 +247,20 @@ UserRegisterStatus = _reflection.GeneratedProtocolMessageType('UserRegisterStatu
   ))
 _sym_db.RegisterMessage(UserRegisterStatus)
 
+UserLoginInfo = _reflection.GeneratedProtocolMessageType('UserLoginInfo', (_message.Message,), dict(
+  DESCRIPTOR = _USERLOGININFO,
+  __module__ = 'casisco_pb2'
+  # @@protoc_insertion_point(class_scope:casisco.UserLoginInfo)
+  ))
+_sym_db.RegisterMessage(UserLoginInfo)
+
+UserLoginStatus = _reflection.GeneratedProtocolMessageType('UserLoginStatus', (_message.Message,), dict(
+  DESCRIPTOR = _USERLOGINSTATUS,
+  __module__ = 'casisco_pb2'
+  # @@protoc_insertion_point(class_scope:casisco.UserLoginStatus)
+  ))
+_sym_db.RegisterMessage(UserLoginStatus)
+
 
 
 _CASISCO = _descriptor.ServiceDescriptor(
@@ -155,8 +269,8 @@ _CASISCO = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=216,
-  serialized_end=299,
+  serialized_start=389,
+  serialized_end=537,
   methods=[
   _descriptor.MethodDescriptor(
     name='registerUser',
@@ -165,6 +279,15 @@ _CASISCO = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_USERREGISTERINFO,
     output_type=_USERREGISTERSTATUS,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='loginUser',
+    full_name='casisco.Casisco.loginUser',
+    index=1,
+    containing_service=None,
+    input_type=_USERLOGININFO,
+    output_type=_USERLOGINSTATUS,
     options=None,
   ),
 ])
@@ -197,6 +320,11 @@ try:
           request_serializer=UserRegisterInfo.SerializeToString,
           response_deserializer=UserRegisterStatus.FromString,
           )
+      self.loginUser = channel.unary_unary(
+          '/casisco.Casisco/loginUser',
+          request_serializer=UserLoginInfo.SerializeToString,
+          response_deserializer=UserLoginStatus.FromString,
+          )
 
 
   class CasiscoServicer(object):
@@ -210,6 +338,13 @@ try:
       context.set_details('Method not implemented!')
       raise NotImplementedError('Method not implemented!')
 
+    def loginUser(self, request, context):
+      # missing associated documentation comment in .proto file
+      pass
+      context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+      context.set_details('Method not implemented!')
+      raise NotImplementedError('Method not implemented!')
+
 
   def add_CasiscoServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -217,6 +352,11 @@ try:
             servicer.registerUser,
             request_deserializer=UserRegisterInfo.FromString,
             response_serializer=UserRegisterStatus.SerializeToString,
+        ),
+        'loginUser': grpc.unary_unary_rpc_method_handler(
+            servicer.loginUser,
+            request_deserializer=UserLoginInfo.FromString,
+            response_serializer=UserLoginStatus.SerializeToString,
         ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -236,6 +376,10 @@ try:
       # missing associated documentation comment in .proto file
       pass
       context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
+    def loginUser(self, request, context):
+      # missing associated documentation comment in .proto file
+      pass
+      context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
 
 
   class BetaCasiscoStub(object):
@@ -251,6 +395,11 @@ try:
       pass
       raise NotImplementedError()
     registerUser.future = None
+    def loginUser(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
+      # missing associated documentation comment in .proto file
+      pass
+      raise NotImplementedError()
+    loginUser.future = None
 
 
   def beta_create_Casisco_server(servicer, pool=None, pool_size=None, default_timeout=None, maximum_timeout=None):
@@ -260,12 +409,15 @@ try:
     file not marked beta) for all further purposes. This function was
     generated only to ease transition from grpcio<0.15.0 to grpcio>=0.15.0"""
     request_deserializers = {
+      ('casisco.Casisco', 'loginUser'): UserLoginInfo.FromString,
       ('casisco.Casisco', 'registerUser'): UserRegisterInfo.FromString,
     }
     response_serializers = {
+      ('casisco.Casisco', 'loginUser'): UserLoginStatus.SerializeToString,
       ('casisco.Casisco', 'registerUser'): UserRegisterStatus.SerializeToString,
     }
     method_implementations = {
+      ('casisco.Casisco', 'loginUser'): face_utilities.unary_unary_inline(servicer.loginUser),
       ('casisco.Casisco', 'registerUser'): face_utilities.unary_unary_inline(servicer.registerUser),
     }
     server_options = beta_implementations.server_options(request_deserializers=request_deserializers, response_serializers=response_serializers, thread_pool=pool, thread_pool_size=pool_size, default_timeout=default_timeout, maximum_timeout=maximum_timeout)
@@ -279,12 +431,15 @@ try:
     file not marked beta) for all further purposes. This function was
     generated only to ease transition from grpcio<0.15.0 to grpcio>=0.15.0"""
     request_serializers = {
+      ('casisco.Casisco', 'loginUser'): UserLoginInfo.SerializeToString,
       ('casisco.Casisco', 'registerUser'): UserRegisterInfo.SerializeToString,
     }
     response_deserializers = {
+      ('casisco.Casisco', 'loginUser'): UserLoginStatus.FromString,
       ('casisco.Casisco', 'registerUser'): UserRegisterStatus.FromString,
     }
     cardinalities = {
+      'loginUser': cardinality.Cardinality.UNARY_UNARY,
       'registerUser': cardinality.Cardinality.UNARY_UNARY,
     }
     stub_options = beta_implementations.stub_options(host=host, metadata_transformer=metadata_transformer, request_serializers=request_serializers, response_deserializers=response_deserializers, thread_pool=pool, thread_pool_size=pool_size)

@@ -1,8 +1,7 @@
 #pragma once
 #include "IHandler.hpp"
-#include <grpc++/grpc++.h>
 #include "casisco.grpc.pb.h"
-#include <memory>
+#include <grpc++/grpc++.h>
 
 namespace casisco
 {
@@ -16,16 +15,14 @@ class LoginUser : public IHandler
 {
 public:
     LoginUser(Casisco::AsyncService*, grpc::ServerCompletionQueue*);
-    virtual bool process();
-    int finish();
-    int request();
+    virtual bool process() override;
 
 private:
     Casisco::AsyncService* service_;
     grpc::ServerCompletionQueue* cq_;
     grpc::ServerContext ctx_;
-    grpc::ServerAsyncResponseWriter<UserRegisterStatus> responder_;
-    casisco::UserRegisterInfo request_;
+    grpc::ServerAsyncResponseWriter<UserLoginStatus> responder_;
+    casisco::UserLoginInfo request_;
     int tag_;
 
     enum class Status

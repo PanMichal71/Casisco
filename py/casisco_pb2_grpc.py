@@ -19,6 +19,11 @@ class CasiscoStub(object):
         request_serializer=casisco__pb2.UserRegisterInfo.SerializeToString,
         response_deserializer=casisco__pb2.UserRegisterStatus.FromString,
         )
+    self.loginUser = channel.unary_unary(
+        '/casisco.Casisco/loginUser',
+        request_serializer=casisco__pb2.UserLoginInfo.SerializeToString,
+        response_deserializer=casisco__pb2.UserLoginStatus.FromString,
+        )
 
 
 class CasiscoServicer(object):
@@ -32,6 +37,13 @@ class CasiscoServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def loginUser(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_CasiscoServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -39,6 +51,11 @@ def add_CasiscoServicer_to_server(servicer, server):
           servicer.registerUser,
           request_deserializer=casisco__pb2.UserRegisterInfo.FromString,
           response_serializer=casisco__pb2.UserRegisterStatus.SerializeToString,
+      ),
+      'loginUser': grpc.unary_unary_rpc_method_handler(
+          servicer.loginUser,
+          request_deserializer=casisco__pb2.UserLoginInfo.FromString,
+          response_serializer=casisco__pb2.UserLoginStatus.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
