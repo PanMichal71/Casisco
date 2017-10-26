@@ -23,8 +23,7 @@ private:
     grpc::ServerCompletionQueue* cq_;
     grpc::ServerContext ctx_;
     grpc::ServerAsyncResponseWriter<UserLoginStatus> responder_;
-    casisco::UserLoginInfo request_;
-    int tag_;
+    UserLoginInfo request_;
     IDatabase& db_;
 
     enum class Status

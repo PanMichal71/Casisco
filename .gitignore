@@ -37,4 +37,4 @@ build/
 .*
 
 # QTi
-CMakeLists.txt.user
+CMakeLists.txt.user*

@@ -23,7 +23,6 @@ private:
     grpc::ServerContext ctx_;
     grpc::ServerAsyncResponseWriter<UserRegisterStatus> responder_;
     casisco::UserRegisterInfo request_;
-    int tag_;
     IDatabase& db_;
 
     enum class Status

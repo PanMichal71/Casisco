@@ -6,22 +6,22 @@ namespace server
 
 bool Database::registerUser(const UserInfo &)
 {
-
+    return true;
 }
 
 bool Database::loginUser(const UserInfo &)
 {
-
+    return true;
 }
 
 bool Database::updateUser(const UserInfo &)
 {
-
+    return true;
 }
 
 bool Database::removeUser(const UserInfo &)
 {
-
+    return true;
 }
 
 

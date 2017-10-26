@@ -2,6 +2,21 @@ cmake_minimum_required(VERSION 2.8)
 project(CASISCO)
 
 #SET(CMAKE_CXX_FLAGS "-g -Wall -Werror -std=c++11")
+add_compile_options(
+    -std=c++14
+    -fdiagnostics-color=auto
+    -g
+    -ffunction-sections
+    -fdata-sections
+    -fPIC
+    -Wsign-compare
+    -Wreturn-type
+    -Wuninitialized
+    -Wunused-variable
+    -Wall
+    -Wpedantic
+    -Werror
+)
 
 # GRPC and Protocol Buffers libraries location
 list(APPEND CMAKE_PREFIX_PATH "/opt/grpc" "/opt/protobuf")
@@ -25,18 +40,4 @@ include_directories(src/)
 add_subdirectory(src)
 add_subdirectory(test)
 
-add_compile_options(
-    -std=c++14
-    -fdiagnostics-color=auto
-    -g
-    -ffunction-sections
-    -fdata-sections
-    -fPIC
-    -Wsign-compare
-    -Wreturn-type
-    -Wmaybe-uninitialized
-    -Wunused-variable
-    -Wall
-    -Wpedantic
-)
 

@@ -29,13 +29,13 @@ bool LoginUser::process()
         responder_.Finish(status, grpc::Status::OK, this);
         new requestHandler::LoginUser (service_, cq_, db_);
         status_ = Status::done;
-        return true;
     }
     else
     {
         std::cout << "Destroying " << this << std::endl;
         delete this;
     }
+    return true;
 }
 
 
