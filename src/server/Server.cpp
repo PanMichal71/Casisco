@@ -1,7 +1,7 @@
 #include "Server.hpp"
-#include "requestHandler/LoginUser.hpp"
-#include "requestHandler/RegisterUser.hpp"
-
+#include "requestHandler/Factory.hpp"
+#include "Database.hpp"
+#include "requestHandler/IHandler.hpp"
 #include <iostream>
 #include <thread>
 
@@ -28,11 +28,13 @@ Server::~Server()
 
 void Server::run()
 {
-    new requestHandler::LoginUser (&service_, completionQueue_.get());
-    new requestHandler::RegisterUser(&service_, completionQueue_.get());
+    requestHandler::Factory factory;
+    Database db;
+    factory.getLoginUser(Context{&service_, completionQueue_.get()}, db);
+    factory.getRegisterUser(Context{&service_, completionQueue_.get()}, db);
     void* tag;
     bool ok;
-    std::cout << "Listening.."<<std::endl;
+    std::cout << "Listening..."<<std::endl;
     while(true)
     {
         GPR_ASSERT(completionQueue_->Next(&tag, &ok));

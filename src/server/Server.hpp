@@ -1,4 +1,6 @@
 #pragma once
+#include "Database.hpp"
+
 #include <grpc++/grpc++.h>
 #include <grpc/support/log.h>
 #include "casisco.grpc.pb.h"
@@ -23,6 +25,7 @@ private:
     Casisco::AsyncService service_;
     std::unique_ptr<grpc::Server> server_;
     std::unique_ptr<grpc::ServerCompletionQueue> completionQueue_;
+    Database database_;
 };
 
 } // server

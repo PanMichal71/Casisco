@@ -7,13 +7,14 @@ namespace casisco
 {
 namespace server
 {
+class IDatabase;
 namespace requestHandler
 {
 
 class RegisterUser : public IHandler
 {
 public:
-    RegisterUser(Casisco::AsyncService*, grpc::ServerCompletionQueue*);
+    RegisterUser(Casisco::AsyncService*, grpc::ServerCompletionQueue*, IDatabase &);
     virtual bool process() override;
 
 private:
@@ -23,6 +24,7 @@ private:
     grpc::ServerAsyncResponseWriter<UserRegisterStatus> responder_;
     casisco::UserRegisterInfo request_;
     int tag_;
+    IDatabase& db_;
 
     enum class Status
     {

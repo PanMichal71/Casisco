@@ -8,13 +8,14 @@ namespace casisco
 
 namespace server
 {
+class IDatabase;
 namespace requestHandler
 {
 
 class LoginUser : public IHandler
 {
 public:
-    LoginUser(Casisco::AsyncService*, grpc::ServerCompletionQueue*);
+    LoginUser(Casisco::AsyncService*, grpc::ServerCompletionQueue*, IDatabase&);
     virtual bool process() override;
 
 private:
@@ -24,6 +25,7 @@ private:
     grpc::ServerAsyncResponseWriter<UserLoginStatus> responder_;
     casisco::UserLoginInfo request_;
     int tag_;
+    IDatabase& db_;
 
     enum class Status
     {

@@ -4,4 +4,6 @@ set (SOURCES
         #request handlers
         requestHandler/RegisterUser.cpp
         requestHandler/LoginUser.cpp
+
+        Database.cpp
     )
