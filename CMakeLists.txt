@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project(CASISCO)
 
-#SET(CMAKE_CXX_FLAGS "-g -Wall -Werror -std=c++11")
 add_compile_options(
     -std=c++14
     -fdiagnostics-color=auto
@@ -24,12 +23,17 @@ list(APPEND CMAKE_PREFIX_PATH "/opt/grpc" "/opt/protobuf")
 # Cmake find modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
+set(PY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/py")
+
 find_package(Protobuf REQUIRED)
 find_package(GRPC REQUIRED)
 
+SET(PROTOS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/protos)
+
 set(PROTOS
-    ${CMAKE_CURRENT_SOURCE_DIR}/protos/casisco.proto
+    ${PROTOS_DIR}/casisco.proto
 )
+
 
 set(PROTO_SRC_DIR ${CMAKE_CURRENT_BINARY_DIR}/proto-src)
 file(MAKE_DIRECTORY ${PROTO_SRC_DIR})

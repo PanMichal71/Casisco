@@ -34,7 +34,7 @@
 
 # Directories
 build/
-
+.idea/
 
 # QTi
 CMakeLists.txt.user*
