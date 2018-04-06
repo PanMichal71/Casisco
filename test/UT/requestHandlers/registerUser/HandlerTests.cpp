@@ -1,4 +1,4 @@
-#include "server/requestHandler/RegisterUser.hpp"
+#include "server/requestHandler/registerUser/Handler.hpp"
 #include "mocks/server/IDatabaseMock.hpp"
 #include "casisco_mock.grpc.pb.h"
 #include <gmock/gmock.h>
@@ -28,22 +28,22 @@ public:
                                          ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag)));
 };
 
-struct RegisterUserTests : ::testing::Test
+struct HandlerShould : ::testing::Test
 {
     virtual void SetUp () override
     {
         EXPECT_CALL(service_, RequestregisterUser(_, _, _, _, _, _)).Times(1).WillOnce(::testing::SaveArg<1>(&request_));
-        sut_ = std::make_shared<RegisterUser>(&service_, nullptr, db_);
+        sut_ = std::make_shared<registerUser::Handler>(&service_, nullptr, db_);
     }
 
-    std::shared_ptr<RegisterUser> sut_;
+    std::shared_ptr<registerUser::Handler> sut_;
     MockService service_;
     IDatabaseMock db_;
     ::casisco::UserRegisterInfo* request_;
 };
 
 
-TEST_F(RegisterUserTests, Test)
+TEST_F(HandlerShould, Test)
 {
     EXPECT_TRUE(true);
 }

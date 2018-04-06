@@ -1,5 +1,5 @@
 #pragma once
-#include "IHandler.hpp"
+#include "server/requestHandler/IHandler.hpp"
 #include "casisco.grpc.pb.h"
 #include <grpc++/grpc++.h>
 
@@ -10,14 +10,16 @@ namespace server
 class IDatabase;
 namespace requestHandler
 {
+namespace registerUser
+{
 
-class RegisterUser : public IHandler
+class Handler : public IHandler
 {
 public:
-    RegisterUser(Casisco::AsyncService*, grpc::ServerCompletionQueue*, IDatabase &);
-    RegisterUser() = delete;
-    RegisterUser(const RegisterUser&) = delete;
-    RegisterUser(const RegisterUser&&) = delete;
+    Handler(Casisco::AsyncService*, grpc::ServerCompletionQueue*, IDatabase &);
+    Handler() = delete;
+    Handler(const Handler&) = delete;
+    Handler(const Handler&&) = delete;
     virtual bool process() override;
 
 private:
@@ -38,6 +40,7 @@ private:
 
 };
 
+} // registerUser
 } // requestHandler
 } // server
 } // casisco

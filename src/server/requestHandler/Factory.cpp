@@ -1,6 +1,6 @@
 #include "Factory.hpp"
 #include "LoginUser.hpp"
-#include "RegisterUser.hpp"
+#include "registerUser/Handler.hpp"
 
 #include "server/Context.hpp"
 
@@ -18,7 +18,7 @@ IHandler* Factory::getLoginUser(const Context& ct, IDatabase &db)
 
 IHandler* Factory::getRegisterUser(const Context &ct, IDatabase &db)
 {
-    return new RegisterUser(ct.service, ct.completionQueue, db);
+    return new registerUser::Handler(ct.service, ct.completionQueue, db);
 }
 
 } // requestHandler
