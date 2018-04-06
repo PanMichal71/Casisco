@@ -1,4 +1,5 @@
 #include "RegisterUser.hpp"
+#include "server/IDatabase.hpp"
 #include <iostream>
 
 namespace casisco
@@ -23,10 +24,36 @@ bool RegisterUser::process()
     if(status_ == Status::processing)
     {
         std::cout << "Processing " << this << std::endl;
-        UserRegisterStatus status;
-        status.set_status(UserRegisterStatus::Status::UserRegisterStatus_Status_ok);
         std::cout << "Received name: " << request_.name() << " password: "
                   << request_.password() << " email: " << request_.email() << std::endl;
+
+        UserInfo ui;
+        ui.email = request_.email();
+        ui.name = request_.name();
+        ui.password = request_.password();
+
+        const UserRegisterStatus status = [&]() -> UserRegisterStatus
+        {
+            UserRegisterStatus status;
+            switch(db_.registerUser(ui) )
+            {
+            case IDatabase::Result::ok:
+                status.set_status(UserRegisterStatus::Status::UserRegisterStatus_Status_ok);
+                break;
+            case IDatabase::Result::wrongEmail:
+                status.set_status(UserRegisterStatus::Status::UserRegisterStatus_Status_emailTaken);
+                break;
+            case IDatabase::Result::wrongLogin:
+                status.set_status(UserRegisterStatus::Status::UserRegisterStatus_Status_nameTaken);
+                break;
+            default:
+                std::cerr << __func__ << "unsupported database result" << std::endl;
+                status.set_status(UserRegisterStatus::Status::UserRegisterStatus_Status_error);
+                break;
+            }
+            return status;
+        }();
+
         responder_.Finish(status, grpc::Status::OK, this);
         new requestHandler::RegisterUser (service_, cq_, db_);
         status_ = Status::done;

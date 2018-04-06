@@ -23,6 +23,7 @@ message UserRegisterStatus
 		ok = 0;
 		nameTaken = 1;
 		emailTaken = 2;
+                error = 3;
 	};
 
 	Status status = 1;
@@ -41,6 +42,7 @@ message UserLoginStatus
 		ok = 0;
 		invalidPassword = 1;
 		noSuchUser = 2;
+                error = 3;
 	};
 
 	Status status = 1;

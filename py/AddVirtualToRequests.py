@@ -1,7 +1,10 @@
+#!/usr/bin/env python
+
 from os import listdir
 from os.path import isfile, join
 import sys
 import re
+
 class AddVirtualToRequest:
 	def __init__(self):
 		self.protoFiles = {}

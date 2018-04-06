@@ -16,8 +16,8 @@ class IHandler;
 class Factory
 {
 public:
-    IHandler* getLoginUser(const Context& ct, const IDatabase& db);
-    IHandler* getRegisterUser(const Context& ct, const IDatabase& db);
+    IHandler* getLoginUser(const Context& ct, IDatabase &db);
+    IHandler* getRegisterUser(const Context& ct, IDatabase &db);
 };
 
 

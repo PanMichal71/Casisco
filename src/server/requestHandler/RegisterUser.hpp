@@ -15,6 +15,9 @@ class RegisterUser : public IHandler
 {
 public:
     RegisterUser(Casisco::AsyncService*, grpc::ServerCompletionQueue*, IDatabase &);
+    RegisterUser() = delete;
+    RegisterUser(const RegisterUser&) = delete;
+    RegisterUser(const RegisterUser&&) = delete;
     virtual bool process() override;
 
 private:

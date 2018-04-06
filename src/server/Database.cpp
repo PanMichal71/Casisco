@@ -4,24 +4,24 @@ namespace casisco
 namespace server
 {
 
-bool Database::registerUser(const UserInfo &)
+IDatabase::Result Database::registerUser(const UserInfo &)
 {
-    return true;
+    return Result::ok;
 }
 
-bool Database::loginUser(const UserInfo &)
+IDatabase::Result Database::loginUser(const UserInfo &)
 {
-    return true;
+    return Result::ok;
 }
 
-bool Database::updateUser(const UserInfo &)
+IDatabase::Result Database::updateUser(const UserInfo &)
 {
-    return true;
+    return Result::ok;
 }
 
-bool Database::removeUser(const UserInfo &)
+IDatabase::Result Database::removeUser(const UserInfo &)
 {
-    return true;
+    return Result::ok;
 }
 
 

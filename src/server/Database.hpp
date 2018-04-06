@@ -9,10 +9,10 @@ namespace server
 class Database : public IDatabase
 {
 public:
-    virtual bool registerUser(const UserInfo&) override;
-    virtual bool loginUser(const UserInfo&) override;
-    virtual bool updateUser(const UserInfo&) override;
-    virtual bool removeUser(const UserInfo&) override;
+    virtual Result registerUser(const UserInfo&) override;
+    virtual Result loginUser(const UserInfo&) override;
+    virtual Result updateUser(const UserInfo&) override;
+    virtual Result removeUser(const UserInfo&) override;
 };
 
 } // server

@@ -16,12 +16,19 @@ struct UserInfo
 class IDatabase
 {
 public:
+    enum class Result
+    {
+        ok,
+        wrongEmail,
+        wrongLogin,
+    };
+
     virtual ~IDatabase() = default;
 
-    virtual bool registerUser(const UserInfo&) = 0;
-    virtual bool loginUser(const UserInfo&)    = 0;
-    virtual bool updateUser(const UserInfo&)   = 0;
-    virtual bool removeUser(const UserInfo&)   = 0;
+    virtual Result registerUser(const UserInfo&) = 0;
+    virtual Result loginUser(const UserInfo&)    = 0;
+    virtual Result updateUser(const UserInfo&)   = 0;
+    virtual Result removeUser(const UserInfo&)   = 0;
 };
 
 } // server
