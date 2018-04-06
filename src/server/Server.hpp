@@ -1,11 +1,17 @@
 #pragma once
 #include "Database.hpp"
 
-#include <grpc++/grpc++.h>
-#include <grpc/support/log.h>
+
 #include "casisco.grpc.pb.h"
 
 #include <string>
+
+namespace grpc
+{
+class Server;
+class ServerCompletionQueue;
+}
+
 
 namespace casisco
 {

@@ -1,7 +1,12 @@
 #include "Server.hpp"
+
+#include <grpc++/grpc++.h>
+#include <grpc/support/log.h>
+
 #include "requestHandler/Factory.hpp"
-#include "Database.hpp"
 #include "requestHandler/IHandler.hpp"
+#include "Context.hpp"
+#include "Database.hpp"
 #include <iostream>
 #include <thread>
 
@@ -14,7 +19,7 @@ Server::Server(const std::string& serverAddress)
     : address_(serverAddress)
 {
     grpc::ServerBuilder builder;
-    builder.AddListeningPort(address_,grpc::InsecureServerCredentials());
+    builder.AddListeningPort(address_, grpc::InsecureServerCredentials());
     builder.RegisterService(&service_);
     completionQueue_ = builder.AddCompletionQueue();
     server_ = builder.BuildAndStart();
