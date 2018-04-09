@@ -41,8 +41,7 @@ const std::vector<DataType> data = {
     std::make_pair(IDatabase::Result::wrongLogin, StatusType::UserRegisterStatus_Status_nameTaken)
 };
 
-INSTANTIATE_TEST_CASE_P(name, ProcessorShould,
-                        ::testing::ValuesIn(data),);
+INSTANTIATE_TEST_CASE_P(name, ProcessorShould, testing::ValuesIn(data),);
 
 } // registerUser
 } // requestHandler

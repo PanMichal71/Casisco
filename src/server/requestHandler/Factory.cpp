@@ -1,5 +1,5 @@
 #include "Factory.hpp"
-#include "LoginUser.hpp"
+#include "loginUser/Handler.hpp"
 #include "registerUser/Handler.hpp"
 
 #include "server/Context.hpp"
@@ -13,7 +13,7 @@ namespace requestHandler
 
 IHandler* Factory::getLoginUser(const Context& ct, IDatabase &db)
 {
-    return new LoginUser(ct.service, ct.completionQueue, db);
+    return new loginUser::Handler(ct.service, ct.completionQueue, db);
 }
 
 IHandler* Factory::getRegisterUser(const Context &ct, IDatabase &db)

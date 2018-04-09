@@ -1,5 +1,5 @@
 #pragma once
-#include "IHandler.hpp"
+#include "server/requestHandler/IHandler.hpp"
 #include "casisco.grpc.pb.h"
 #include <grpc++/grpc++.h>
 
@@ -11,11 +11,13 @@ namespace server
 class IDatabase;
 namespace requestHandler
 {
+namespace loginUser
+{
 
-class LoginUser : public IHandler
+class Handler : public IHandler
 {
 public:
-    LoginUser(Casisco::AsyncService*, grpc::ServerCompletionQueue*, IDatabase&);
+    Handler(Casisco::AsyncService*, grpc::ServerCompletionQueue*, IDatabase&);
     virtual bool process() override;
 
 private:
@@ -35,6 +37,7 @@ private:
     Status status_;
 };
 
+} //loginUser
 } // requestHandler
 } // server
 } // casisco
