@@ -2,8 +2,8 @@
 
 namespace casisco
 {
-class UserRegisterInfo;
-class UserRegisterStatus;
+class UserLoginInfo;
+class UserLoginStatus;
 
 namespace server
 {
@@ -17,7 +17,7 @@ namespace loginUser
 class Processor
 {
 public:
-    UserRegisterStatus process(IDatabase& db, casisco::UserRegisterInfo& userRegisterInfo );
+    UserLoginStatus process(IDatabase& db, casisco::UserLoginInfo& request );
 };
 
 } // loginUser

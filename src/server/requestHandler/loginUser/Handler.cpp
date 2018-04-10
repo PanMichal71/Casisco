@@ -1,4 +1,5 @@
 #include "Handler.hpp"
+#include "Processor.hpp"
 #include <iostream>
 
 namespace casisco
@@ -24,9 +25,10 @@ bool Handler::process()
     if(status_ == Status::processing)
     {
         std::cout << "Processing " << this << std::endl;
-        UserLoginStatus status;
-        status.set_status(UserLoginStatus::Status::UserLoginStatus_Status_ok);
+        Processor processor;
+        const auto status = processor.process(db_, request_);
         std::cout << "Received name: " << request_.name() << " password: " << request_.password() << std::endl;
+
         responder_.Finish(status, grpc::Status::OK, this);
         new loginUser::Handler (service_, cq_, db_);
         status_ = Status::done;

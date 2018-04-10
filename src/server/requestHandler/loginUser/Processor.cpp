@@ -12,38 +12,37 @@ namespace requestHandler
 namespace loginUser
 {
 
-UserRegisterStatus Processor::process(IDatabase &db, casisco::UserRegisterInfo &userRegisterInfo)
+UserLoginStatus Processor::process(IDatabase &db, UserLoginInfo &request)
 {
     const UserInfo ui {
-        userRegisterInfo.email(),
-        userRegisterInfo.name(),
-        userRegisterInfo.password()
+        request.name(),
+        request.password()
     };
 
-    const auto status = [&]() -> UserRegisterStatus_Status
+    const auto status = [&]() -> UserLoginStatus_Status
     {
-        typedef UserRegisterStatus::Status StatusType;
-        UserRegisterStatus_Status status;
+        typedef UserLoginStatus::Status StatusType;
+        UserLoginStatus_Status status;
         switch(db.registerUser(ui) )
         {
         case IDatabase::Result::ok:
-            status = StatusType::UserRegisterStatus_Status_ok;
-            break;
-        case IDatabase::Result::wrongEmail:
-            status = StatusType::UserRegisterStatus_Status_emailTaken;
+            status = StatusType::UserLoginStatus_Status_ok;
             break;
         case IDatabase::Result::wrongLogin:
-            status = StatusType::UserRegisterStatus_Status_nameTaken;
+            status = StatusType::UserLoginStatus_Status_noSuchUser;
+            break;
+        case IDatabase::Result::wrongPassword:
+            status = StatusType::UserLoginStatus_Status_invalidPassword;
             break;
         default:
             std::cerr << __func__ << " unsupported database result" << std::endl;
-            status = StatusType::UserRegisterStatus_Status_error;
+            status = StatusType::UserLoginStatus_Status_error;
             break;
         }
         return status;
     }();
 
-    UserRegisterStatus result;
+    UserLoginStatus result;
     result.set_status(status);
     return result;
 }

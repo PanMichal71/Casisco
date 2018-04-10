@@ -21,6 +21,7 @@ public:
         ok,
         wrongEmail,
         wrongLogin,
+        wrongPassword
     };
 
     virtual ~IDatabase() = default;

@@ -38,7 +38,8 @@ TEST_P(ProcessorShould, setStatusOkIfSucceded)
 const std::vector<DataType> data = {
     std::make_pair(IDatabase::Result::ok, StatusType::UserRegisterStatus_Status_ok),
     std::make_pair(IDatabase::Result::wrongEmail, StatusType::UserRegisterStatus_Status_emailTaken),
-    std::make_pair(IDatabase::Result::wrongLogin, StatusType::UserRegisterStatus_Status_nameTaken)
+    std::make_pair(IDatabase::Result::wrongLogin, StatusType::UserRegisterStatus_Status_nameTaken),
+    std::make_pair(IDatabase::Result::wrongPassword, StatusType::UserRegisterStatus_Status_error)
 };
 
 INSTANTIATE_TEST_CASE_P(name, ProcessorShould, testing::ValuesIn(data),);
