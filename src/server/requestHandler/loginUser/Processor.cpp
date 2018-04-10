@@ -12,6 +12,12 @@ namespace requestHandler
 namespace loginUser
 {
 
+Processor::Processor()
+    : log_("server::requestHandler::loginUser::Processor")
+{
+
+}
+
 UserLoginStatus Processor::process(IDatabase &db, UserLoginInfo &request)
 {
     const UserInfo ui {
@@ -35,7 +41,7 @@ UserLoginStatus Processor::process(IDatabase &db, UserLoginInfo &request)
             status = StatusType::UserLoginStatus_Status_invalidPassword;
             break;
         default:
-            std::cerr << __func__ << " unsupported database result" << std::endl;
+            log_ << WARNING << __func__ << " unsupported database result";
             status = StatusType::UserLoginStatus_Status_error;
             break;
         }

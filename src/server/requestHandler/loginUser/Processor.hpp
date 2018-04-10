@@ -1,4 +1,5 @@
 #pragma once
+#include "common/Logger.hpp"
 
 namespace casisco
 {
@@ -17,7 +18,11 @@ namespace loginUser
 class Processor
 {
 public:
+    explicit Processor();
     UserLoginStatus process(IDatabase& db, casisco::UserLoginInfo& request );
+
+private:
+    common::Logger log_;
 };
 
 } // loginUser

@@ -1,9 +1,7 @@
 #pragma once
+#include "common/Logger.hpp"
 #include "Database.hpp"
-
-
 #include "casisco.grpc.pb.h"
-
 #include <string>
 
 namespace grpc
