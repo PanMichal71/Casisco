@@ -11,7 +11,12 @@ Logger::Logger(const std::string &str)
 
 }
 
-const std::__cxx11::string Logger::severityToString(ELogSeverity severity) const
+void Logger::print() const
+{
+    std::cout << stream_.str() << std::endl;
+}
+
+const std::string Logger::severityToString(ELogSeverity severity) const
 {
     switch(severity)
     {
