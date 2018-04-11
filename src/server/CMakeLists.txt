@@ -14,4 +14,7 @@ add_custom_target(
 add_library(CASISCO ${SOURCES} ${PROTO_SRCS} ${GRPC_SRCS})
 add_dependencies(CASISCO AddVirtualKeyword)
 
+add_executable(server_cli.out main.cpp)
+target_link_libraries(server_cli.out CASISCO)
+
 target_link_libraries(CASISCO gRPC::grpc++_reflection  protobuf::libprotobuf common)
