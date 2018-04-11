@@ -1,8 +1,6 @@
 #pragma once
 #include <string>
-#include <sstream>
 #include <iostream>
-#include <strstream>
 
 namespace casisco
 {
@@ -47,7 +45,7 @@ public:
 
     LogImpl operator<<(ELogSeverity severity)
     {
-        std::cout << prefix_ << " [INFO] ";
+        std::cout << severityToString(severity) << prefix_ ;
         return LogImpl(*this);
     }
 
@@ -58,6 +56,8 @@ private:
         std::cout << value;
         return *this;
     }
+
+    const std::string severityToString(ELogSeverity severity) const;
 
 private:
     const std::string prefix_;

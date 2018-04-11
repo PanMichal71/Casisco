@@ -6,8 +6,8 @@ set (SOURCES
         requestHandler/Factory.cpp
         requestHandler/registerUser/Handler.cpp
         requestHandler/registerUser/Processor.cpp
-        requestHandler/LoginUser/Handler.cpp
-        requestHandler/LoginUser/Processor.cpp
+        requestHandler/loginUser/Handler.cpp
+        requestHandler/loginUser/Processor.cpp
         requestHandler/Factory.cpp
         Database.cpp
     )
