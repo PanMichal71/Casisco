@@ -1,4 +1,5 @@
 #include "Logger.hpp"
+#include <iostream>
 
 namespace casisco
 {
@@ -11,9 +12,10 @@ Logger::Logger(const std::string &str)
 
 }
 
-void Logger::print() const
+void Logger::print()
 {
     std::cout << stream_.str() << std::endl;
+    stream_.str(std::string());
 }
 
 const std::string Logger::severityToString(ELogSeverity severity) const

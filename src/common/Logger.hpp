@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <iostream>
 #include <sstream>
 
 namespace casisco
@@ -41,6 +40,8 @@ private:
 
 public:
     Logger(const std::string& str);
+    Logger(const Logger&)  = delete;
+    Logger(const Logger&&) = delete;
     ~Logger() = default;
 
     LogImpl operator<<(ELogSeverity severity)
@@ -57,7 +58,7 @@ private:
         return *this;
     }
 
-    void print() const;
+    void print();
 
     const std::string severityToString(ELogSeverity severity) const;
 
