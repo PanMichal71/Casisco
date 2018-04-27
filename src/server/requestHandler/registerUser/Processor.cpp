@@ -15,8 +15,8 @@ namespace registerUser
 UserRegisterStatus Processor::process(IDatabase &db, casisco::UserRegisterInfo &userRegisterInfo)
 {
     const UserInfo ui {
-        userRegisterInfo.email(),
         userRegisterInfo.name(),
+        userRegisterInfo.email(),
         userRegisterInfo.password()
     };
 

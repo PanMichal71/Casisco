@@ -11,11 +11,13 @@ class ServerStub:
     def __init__(self):
         self.process = None
 
-    def __del__(self):
-        if(self.process != None):
+    def cleanup(self):
+         if(self.process != None):
+            print ("Killing server process: {}".format(self.process.pid))
             os.killpg(self.process.pid, signal.SIGTERM)
 
     def is_running(self, host, port):
+        print ("is running")
         args = socket.getaddrinfo(
             host, port, socket.AF_INET, socket.SOCK_STREAM)
         for family, socktype, proto, canonname, sockaddr in args:
@@ -26,6 +28,7 @@ class ServerStub:
             except socket.error:
                 return False
             else:
+                print ("closing socket")
                 s.close()
                 return True
 
@@ -43,7 +46,7 @@ class ServerStub:
                 print ("Timeout on waiting for server!")
                 return False
 
-            time.sleep(0.1)
+            time.sleep(0.25)
 
     def start_process(self, host, port):
         addr = host+":{}".format(port)

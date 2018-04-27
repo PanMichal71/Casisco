@@ -17,4 +17,4 @@ add_dependencies(CASISCO AddVirtualKeyword)
 add_executable(server_cli.out main.cpp)
 target_link_libraries(server_cli.out CASISCO)
 
-target_link_libraries(CASISCO gRPC::grpc++_reflection  protobuf::libprotobuf common)
+target_link_libraries(CASISCO gRPC::grpc++_reflection  protobuf::libprotobuf common leveldb pthread)

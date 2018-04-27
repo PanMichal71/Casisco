@@ -21,11 +21,12 @@ public:
         ok,
         wrongEmail,
         wrongLogin,
-        wrongPassword
+        wrongPassword,
+        error
     };
 
     virtual ~IDatabase() = default;
-
+    virtual bool init()  = 0;
     virtual Result registerUser(const UserInfo&) = 0;
     virtual Result loginUser(const UserInfo&)    = 0;
     virtual Result updateUser(const UserInfo&)   = 0;

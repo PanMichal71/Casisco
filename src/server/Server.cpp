@@ -35,6 +35,7 @@ void Server::run()
 {
     requestHandler::Factory factory;
     Database db;
+    db.init();
     factory.getLoginUser(Context{&service_, completionQueue_.get()}, db);
     factory.getRegisterUser(Context{&service_, completionQueue_.get()}, db);
     void* tag;

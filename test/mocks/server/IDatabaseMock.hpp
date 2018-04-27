@@ -9,6 +9,7 @@ namespace server
 class IDatabaseMock : public IDatabase
 {
 public:
+    MOCK_METHOD0(init, bool());
     MOCK_METHOD1(registerUser, Result (const UserInfo&));
     MOCK_METHOD1(loginUser, Result (const UserInfo&));
     MOCK_METHOD1(updateUser, Result (const UserInfo&));
