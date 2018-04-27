@@ -26,6 +26,9 @@ public:
     virtual Result removeUser(const UserInfo&) override;
 
 private:
+    bool userExists(const std::string& name) const;
+
+private:
     common::Logger log_;
     std::unique_ptr<leveldb::DB> db_;
 };

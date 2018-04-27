@@ -43,9 +43,9 @@ IDatabase::Result Database::registerUser(const UserInfo &info)
         return Result::error;
     }
 
-    std::string valueFound ;
-    const auto s = db_->Get({}, info.name, &valueFound);
-    if(not s.IsNotFound())
+
+
+    if(userExists(info.name))
     {
         log_ << DEBUG << "user: " << info.name << " already exists";
         return Result::wrongLogin;
@@ -75,6 +75,13 @@ IDatabase::Result Database::updateUser(const UserInfo &)
 IDatabase::Result Database::removeUser(const UserInfo &)
 {
     return Result::ok;
+}
+
+bool Database::userExists(const std::string &name) const
+{
+    std::string valueFound ;
+    const auto s = db_->Get({}, name, &valueFound);
+    return s.ok();
 }
 
 
