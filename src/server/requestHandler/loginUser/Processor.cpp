@@ -34,10 +34,10 @@ UserLoginStatus Processor::process(IDatabase &db, UserLoginInfo &request)
         case IDatabase::Result::ok:
             status = StatusType::UserLoginStatus_Status_ok;
             break;
-        case IDatabase::Result::wrongLogin:
+        case IDatabase::Result::loginTaken:
             status = StatusType::UserLoginStatus_Status_noSuchUser;
             break;
-        case IDatabase::Result::wrongPassword:
+        case IDatabase::Result::failedToLogin:
             status = StatusType::UserLoginStatus_Status_invalidPassword;
             break;
         default:

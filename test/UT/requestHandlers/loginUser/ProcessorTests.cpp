@@ -38,8 +38,8 @@ TEST_P(LoginUserProcessorShould, setStatusOkIfSucceded)
 
 const std::vector<DataType> data = {
     std::make_pair(IDatabase::Result::ok, StatusType::UserLoginStatus_Status_ok),
-    std::make_pair(IDatabase::Result::wrongPassword, StatusType::UserLoginStatus_Status_invalidPassword),
-    std::make_pair(IDatabase::Result::wrongLogin, StatusType::UserLoginStatus_Status_noSuchUser),
+    std::make_pair(IDatabase::Result::failedToLogin, StatusType::UserLoginStatus_Status_invalidPassword),
+    std::make_pair(IDatabase::Result::loginTaken, StatusType::UserLoginStatus_Status_noSuchUser),
     std::make_pair(IDatabase::Result::wrongEmail, StatusType::UserLoginStatus_Status_error)
 };
 

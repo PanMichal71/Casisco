@@ -32,7 +32,7 @@ UserRegisterStatus Processor::process(IDatabase &db, casisco::UserRegisterInfo &
         case IDatabase::Result::wrongEmail:
             status = StatusType::UserRegisterStatus_Status_emailTaken;
             break;
-        case IDatabase::Result::wrongLogin:
+        case IDatabase::Result::loginTaken:
             status = StatusType::UserRegisterStatus_Status_nameTaken;
             break;
         default:

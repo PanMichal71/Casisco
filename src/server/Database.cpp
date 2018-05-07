@@ -8,13 +8,11 @@ namespace server
 
 Database::Database()
     :log_("Database")
-{
-
+{   
 }
 
 Database::~Database()
 {
-
 }
 
 bool Database::init()
@@ -23,7 +21,7 @@ bool Database::init()
     leveldb::Options options;
     options.create_if_missing = true;
 
-    leveldb::Status status = leveldb::DB::Open(options, "./testdb", &db);
+    leveldb::Status status = leveldb::DB::Open(options, "./database", &db);
     if(not status.ok())
     {
         log_<< ERROR << "Failed to open!!";
@@ -43,28 +41,22 @@ IDatabase::Result Database::registerUser(const UserInfo &info)
         return Result::error;
     }
 
-
-
     if(userExists(info.name))
     {
         log_ << DEBUG << "user: " << info.name << " already exists";
-        return Result::wrongLogin;
+        return Result::loginTaken;
     }
 
     log_ << DEBUG << "user: " << info.name << " successfully registed";
     auto res = db_->Put({}, info.name, info.password);
-    return res.ok() ? Result::ok : Result::wrongLogin;
-    return Result::ok;
+    return res.ok() ? Result::ok : Result::loginTaken;
 }
 
 IDatabase::Result Database::loginUser(const UserInfo &info)
 {
-    std::string value;
-    auto res = db_->Get({}, info.name, &value);
-    if(res.ok() && value == info.password)
-        return Result::ok;
-
-    return Result::wrongPassword;
+    std::string password;
+    const auto res = db_->Get({}, info.name, &password);
+    return res.ok() && password == info.password ? Result::ok : Result::failedToLogin;
 }
 
 IDatabase::Result Database::updateUser(const UserInfo &)

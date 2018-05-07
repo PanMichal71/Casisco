@@ -20,8 +20,8 @@ public:
     {
         ok,
         wrongEmail,
-        wrongLogin,
-        wrongPassword,
+        loginTaken,
+        failedToLogin,
         error
     };
 
