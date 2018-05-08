@@ -1,5 +1,10 @@
 PATH=$PATH:$PWD/build/src/server
-echo $PATH
+echo "Generating python source files"
+CASISCO_GRPC_DIR="./test/SCT/casisco_grpc"
+mkdir -p $CASISCO_GRPC_DIR
+touch $CASISCO_GRPC_DIR/__init__.py
+python -m grpc_tools.protoc -I./protos --python_out=$CASISCO_GRPC_DIR --grpc_python_out=$CASISCO_GRPC_DIR ./protos/casisco.proto
 cd test/SCT
-python -m pytest -q -v
+echo "Running test"
+python -m pytest -q -v --tb=long
 cd -

@@ -5,7 +5,7 @@ import os
 import ServerStub
 
 import grpc
-import casisco_pb2_grpc
+from casisco_grpc import casisco_pb2_grpc
 
 
 @pytest.yield_fixture()

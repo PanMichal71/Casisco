@@ -2,8 +2,7 @@ import pytest
 import ServerStub
 
 import grpc
-import casisco_pb2_grpc
-import casisco_pb2
+from casisco_grpc import casisco_pb2_grpc, casisco_pb2
 
 
 @pytest.mark.usefixtures("srv")

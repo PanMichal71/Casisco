@@ -2,8 +2,8 @@ from __future__ import print_function
 
 import grpc
 
-import casisco_pb2_grpc
-import casisco_pb2
+from casisco_grpc import casisco_pb2_grpc, casisco_pb2
+# import casisco_grpc.
 
 class ClientStub:
   def run(self):
