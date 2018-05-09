@@ -16,8 +16,8 @@ UserRegisterStatus Processor::process(IDatabase &db, casisco::UserRegisterInfo &
 {
     const UserInfo ui {
         userRegisterInfo.name(),
-        userRegisterInfo.email(),
-        userRegisterInfo.password()
+        userRegisterInfo.password(),
+        userRegisterInfo.email()
     };
 
     const auto status = [&]() -> UserRegisterStatus_Status

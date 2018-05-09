@@ -46,9 +46,11 @@ IDatabase::Result Database::registerUser(const UserInfo &info)
         log_ << DEBUG << "user: " << info.name << " already exists";
         return Result::loginTaken;
     }
-
-    log_ << DEBUG << "user: " << info.name << " successfully registed";
     auto res = db_->Put({}, info.name, info.password);
+
+    if(res.ok())
+        log_ << DEBUG << "user: " << info.name << " successfully registered";
+
     return res.ok() ? Result::ok : Result::loginTaken;
 }
 
@@ -56,7 +58,12 @@ IDatabase::Result Database::loginUser(const UserInfo &info)
 {
     std::string password;
     const auto res = db_->Get({}, info.name, &password);
-    return res.ok() && password == info.password ? Result::ok : Result::failedToLogin;
+    if(not res.ok())
+    {
+        log_ << DEBUG << "couldn't find " << info.name << " in database";
+        return Result::failedToLogin;
+    }
+    return  password == info.password ? Result::ok : Result::failedToLogin;
 }
 
 IDatabase::Result Database::updateUser(const UserInfo &)

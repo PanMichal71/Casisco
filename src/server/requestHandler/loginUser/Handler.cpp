@@ -30,7 +30,7 @@ bool Handler::process()
         std::cout << "Received name: " << request_.name() << " password: " << request_.password() << std::endl;
 
         responder_.Finish(status, grpc::Status::OK, this);
-        new loginUser::Handler (service_, cq_, db_);
+        new Handler (service_, cq_, db_);
         status_ = Status::done;
     }
     else

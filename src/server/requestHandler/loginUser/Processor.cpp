@@ -29,19 +29,12 @@ UserLoginStatus Processor::process(IDatabase &db, UserLoginInfo &request)
     {
         typedef UserLoginStatus::Status StatusType;
         UserLoginStatus_Status status;
-        switch(db.registerUser(ui) )
+        switch(db.loginUser(ui) )
         {
         case IDatabase::Result::ok:
             status = StatusType::UserLoginStatus_Status_ok;
             break;
-        case IDatabase::Result::loginTaken:
-            status = StatusType::UserLoginStatus_Status_noSuchUser;
-            break;
-        case IDatabase::Result::failedToLogin:
-            status = StatusType::UserLoginStatus_Status_invalidPassword;
-            break;
         default:
-            log_ << WARNING << __func__ << " unsupported database result";
             status = StatusType::UserLoginStatus_Status_error;
             break;
         }

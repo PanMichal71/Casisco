@@ -1,3 +1,9 @@
+#python test generated files
+test/SCT/casisco_grpc/
+
+#failed tests output dir
+failed_tests_output
+
 # Prerequisites
 *.d
 

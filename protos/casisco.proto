@@ -6,6 +6,7 @@ service Casisco
 {
 	rpc registerUser(UserRegisterInfo) returns (UserRegisterStatus) {}
 	rpc loginUser(UserLoginInfo) returns (UserLoginStatus) {}
+	rpc createProject(ProjectInfo) returns (ReplyStatus) {}
 };
 
 
@@ -42,8 +43,26 @@ message UserLoginStatus
 		ok = 0;
 		invalidPassword = 1;
 		noSuchUser = 2;
-                error = 3;
+		error = 3;
 	};
 
+	Status status = 1;
+};
+
+message ProjectInfo
+{
+	string name   = 1;
+	string author = 2;
+	bytes  data   = 3;
+	bytes  binaryFile = 4;
+};
+
+message ReplyStatus
+{
+	enum Status
+	{
+		ok 	  = 0;
+		error = 1;
+	}
 	Status status = 1;
 };

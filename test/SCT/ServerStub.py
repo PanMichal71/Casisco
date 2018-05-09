@@ -11,6 +11,12 @@ class ServerStub:
     def __init__(self):
         self.process = None
 
+    def save_stdout(self, path):
+        with open(path, 'w+') as file:
+            for line in self.process.stdout.readlines():
+                file.write("%s\n" % line.strip())
+                print("{}".format(line.strip()))
+
     def cleanup(self):
          if(self.process != None):
             print ("Killing server process: {}".format(self.process.pid))
