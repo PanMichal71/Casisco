@@ -38,15 +38,14 @@ class TestDatabaseInteraction:
         self.register_user_and_expect_status(
             srv, self.name, self.password, self.email, self.loginTaken)
 
+    def test_should_fail_to_login_unknown_user(self, srv):
+        self.login_user_and_expect_status(srv, self.name, self.password, 3)
 
     def test_successfully_registers_and_login_user(self, srv):
         self.register_user_and_expect_status(
             srv, self.name, self.password, self.email, self.success)
-        self.login_user_and_expect_status(srv, self.name, self.password, self.success)
-
-    def test_should_fail_to_login_unknown_user(self, srv):
-        self.login_user_and_expect_status(srv, self.name, self.password, 3)
-
+        self.login_user_and_expect_status(
+            srv, self.name, self.password, self.success)
 
 
 

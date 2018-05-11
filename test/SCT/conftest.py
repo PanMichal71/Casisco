@@ -15,6 +15,18 @@ def pytest_runtest_makereport(item, call):
     rep = outcome.get_result()
     setattr(item, "rep_" + rep.when, rep)
 
+def zip_database(output_dir, tmp_dir_path, db_path):
+    db_archive_path = os.path.join(
+        output_dir, db_path)
+
+    tmp_dir_db_path = os.path.join(tmp_dir_path, db_path)
+    if not os.path.exists(tmp_dir_db_path):
+        print ("{} doesn't exist".format(tmp_dir_db_path))
+        return
+
+    print("Zipping {}".format(tmp_dir_db_path))
+    shutil.make_archive(db_archive_path, 'zip', tmp_dir_db_path)
+
 @pytest.fixture()
 def cleandir(request):
     test_dir = os.getcwd()
@@ -27,15 +39,13 @@ def cleandir(request):
     def fin():
         if should_save == 1:
             testcase_output_dir = os.path.join(test_output_dir, request.node.name)
-            if  os.path.exists(testcase_output_dir):
+            if os.path.exists(testcase_output_dir):
                 shutil.rmtree(testcase_output_dir)
-
             os.makedirs(testcase_output_dir)
+            stub.save_stdout("{}/server.log".format(testcase_output_dir))
+            zip_database(testcase_output_dir, tmp_path, "databases/users")
+            zip_database(testcase_output_dir, tmp_path, "databases/emails")
 
-            path = "{}/server.log".format(testcase_output_dir)
-            db_archive_path = os.path.join(testcase_output_dir, "database")
-            stub.save_stdout(path)
-            shutil.make_archive(db_archive_path, 'zip', os.path.join(tmp_path, "database"))
         shutil.rmtree(tmp_path)
 
     request.addfinalizer(fin)

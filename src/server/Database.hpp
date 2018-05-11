@@ -30,7 +30,8 @@ private:
 
 private:
     common::Logger log_;
-    std::unique_ptr<leveldb::DB> db_;
+    std::unique_ptr<leveldb::DB> usersDb_;
+    std::unique_ptr<leveldb::DB> emailsDb_;
 };
 
 } // server

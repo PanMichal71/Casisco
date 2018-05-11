@@ -1,5 +1,6 @@
 #include "Database.hpp"
 #include "leveldb/db.h"
+#include <boost/filesystem.hpp>
 
 namespace casisco
 {
@@ -15,27 +16,42 @@ Database::~Database()
 {
 }
 
-bool Database::init()
+namespace
+{
+auto openDb(const std::string& dbName) -> std::unique_ptr<leveldb::DB>
 {
     leveldb::DB* db;
     leveldb::Options options;
     options.create_if_missing = true;
+    const auto status = leveldb::DB::Open(options, dbName, &db);
+    return status.ok() ? std::unique_ptr<leveldb::DB>(db) : nullptr;
+}
+} //namespace
 
-    leveldb::Status status = leveldb::DB::Open(options, "./database", &db);
-    if(not status.ok())
+bool Database::init()
+{
+    boost::filesystem::create_directories("databases");
+    usersDb_  = openDb("./databases/users");
+    emailsDb_ = openDb("./databases/emails");
+    if(usersDb_ == nullptr)
     {
-        log_<< ERROR << "Failed to open!!";
+        log_ << ERROR << "Failed to open usersDb";
         return false;
     }
 
-    db_ = std::unique_ptr<leveldb::DB>(db);
+    if(emailsDb_ == nullptr)
+    {
+        log_ << ERROR << "Failed to open emailsDb";
+        return false;
+    }
+
     return true;
 }
 
 IDatabase::Result Database::registerUser(const UserInfo &info)
 {
     log_ << DEBUG << __func__;
-    if(not db_)
+    if(not usersDb_)
     {
         log_ << ERROR << "uninitialized";
         return Result::error;
@@ -46,18 +62,19 @@ IDatabase::Result Database::registerUser(const UserInfo &info)
         log_ << DEBUG << "user: " << info.name << " already exists";
         return Result::loginTaken;
     }
-    auto res = db_->Put({}, info.name, info.password);
+    const auto res = usersDb_->Put({}, info.name, info.password);
+    const auto mail_res = emailsDb_->Put({}, info.name, info.email);
 
-    if(res.ok())
+    if(res.ok() and mail_res.ok())
         log_ << DEBUG << "user: " << info.name << " successfully registered";
 
-    return res.ok() ? Result::ok : Result::loginTaken;
+    return res.ok() and mail_res.ok() ? Result::ok : Result::loginTaken;
 }
 
 IDatabase::Result Database::loginUser(const UserInfo &info)
 {
     std::string password;
-    const auto res = db_->Get({}, info.name, &password);
+    const auto res = usersDb_->Get({}, info.name, &password);
     if(not res.ok())
     {
         log_ << DEBUG << "couldn't find " << info.name << " in database";
@@ -79,7 +96,7 @@ IDatabase::Result Database::removeUser(const UserInfo &)
 bool Database::userExists(const std::string &name) const
 {
     std::string valueFound ;
-    const auto s = db_->Get({}, name, &valueFound);
+    const auto s = usersDb_->Get({}, name, &valueFound);
     return s.ok();
 }
 
