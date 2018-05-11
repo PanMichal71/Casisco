@@ -5,8 +5,12 @@ package casisco;
 service Casisco
 {
 	rpc registerUser(UserRegisterInfo) returns (UserRegisterStatus) {}
-	rpc loginUser(UserLoginInfo) returns (UserLoginStatus) {}
-	rpc createProject(ProjectInfo) returns (ReplyStatus) {}
+	rpc loginUser(UserLoginInfo) 	   returns (UserLoginStatus) {}
+	
+	rpc createProject(ProjectInfo) 		 returns (ReplyStatus) {}
+	rpc getAlgorithmFile(ProjectInfo)    returns (AlgorithmFileReply) {}
+	rpc getPartData(ProjectInfo) 		 returns (PartDataReply) {}
+	rpc sendPartialResult(PartialResult) returns (ReplyStatus) {}
 };
 
 
@@ -56,6 +60,38 @@ message ProjectInfo
 	bytes  data   = 3;
 	bytes  binaryFile = 4;
 };
+
+message AlgorithmFileReply
+{
+	string name = 1;
+	bytes  binaryFile = 2;
+	enum Status
+	{
+		ok 	  = 0;
+		error = 1;
+	}
+	Status status = 3;
+}
+
+message PartDataReply
+{
+	string name  = 1;
+	int64 partId = 2;
+	bytes data   = 3;
+	enum Status
+	{
+		ok 	  = 0;
+		error = 1;
+	}
+	Status status = 4;
+}
+
+message PartialResult
+{
+	string name  = 1;
+	int64 partId = 2;
+	bytes data   = 3;
+}
 
 message ReplyStatus
 {
