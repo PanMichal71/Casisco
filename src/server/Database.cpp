@@ -33,15 +33,9 @@ bool Database::init()
     boost::filesystem::create_directories("databases");
     usersDb_  = openDb("./databases/users");
     emailsDb_ = openDb("./databases/emails");
-    if(usersDb_ == nullptr)
+    if(usersDb_ == nullptr or emailsDb_ == nullptr)
     {
-        log_ << ERROR << "Failed to open usersDb";
-        return false;
-    }
-
-    if(emailsDb_ == nullptr)
-    {
-        log_ << ERROR << "Failed to open emailsDb";
+        log_ << ERROR << "Failed to open databases";
         return false;
     }
 

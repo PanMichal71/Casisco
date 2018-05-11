@@ -8,6 +8,7 @@ from casisco_grpc import casisco_pb2_grpc, casisco_pb2
 class TestDatabaseInteraction:
     success = 0
     loginTaken = 1
+    error = 3
     name = "test"
     password = "testpasswd"
     email = "test@test.com"
@@ -39,7 +40,7 @@ class TestDatabaseInteraction:
             srv, self.name, self.password, self.email, self.loginTaken)
 
     def test_should_fail_to_login_unknown_user(self, srv):
-        self.login_user_and_expect_status(srv, self.name, self.password, 3)
+        self.login_user_and_expect_status(srv, self.name, self.password, self.error)
 
     def test_successfully_registers_and_login_user(self, srv):
         self.register_user_and_expect_status(
