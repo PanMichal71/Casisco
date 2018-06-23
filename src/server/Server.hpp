@@ -1,6 +1,5 @@
 #pragma once
 #include "common/Logger.hpp"
-#include "Database.hpp"
 #include "casisco.grpc.pb.h"
 #include <string>
 
@@ -30,7 +29,6 @@ private:
     Casisco::AsyncService service_;
     std::unique_ptr<grpc::Server> server_;
     std::unique_ptr<grpc::ServerCompletionQueue> completionQueue_;
-    Database database_;
 };
 
 } // server

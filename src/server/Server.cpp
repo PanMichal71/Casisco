@@ -5,8 +5,8 @@
 
 #include "requestHandler/Factory.hpp"
 #include "requestHandler/IHandler.hpp"
+#include "requestHandler/user/Database.hpp"
 #include "Context.hpp"
-#include "Database.hpp"
 #include <iostream>
 #include <thread>
 
@@ -35,7 +35,7 @@ Server::~Server()
 void Server::run()
 {
     requestHandler::Factory factory;
-    Database db;
+    requestHandler::user::Database db;
     db.init();
     factory.getLoginUser(Context{&service_, completionQueue_.get()}, db);
     factory.getRegisterUser(Context{&service_, completionQueue_.get()}, db);

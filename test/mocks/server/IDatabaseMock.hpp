@@ -1,11 +1,12 @@
 #pragma once
-#include "server/IDatabase.hpp"
+#include "server/requestHandler/user/IDatabase.hpp"
 #include <gmock/gmock.h>
 namespace casisco
 {
 namespace server
 {
-
+namespace requestHandler
+{
 class IDatabaseMock : public IDatabase
 {
 public:
@@ -16,5 +17,6 @@ public:
     MOCK_METHOD1(removeUser, Result (const UserInfo&));
 };
 
+} // requestHandler
 } // server
 } // casisco

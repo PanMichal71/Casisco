@@ -7,6 +7,8 @@ namespace server
 {
 namespace requestHandler
 {
+namespace user
+{
 namespace login
 {
 Handler::Handler(Casisco::AsyncService *service, grpc::ServerCompletionQueue *cq, IDatabase &db)
@@ -40,6 +42,7 @@ bool Handler::process()
 }
 
 } // login
+} // user
 } // requestHandler
 } // server
 } // casisco

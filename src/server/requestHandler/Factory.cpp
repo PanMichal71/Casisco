@@ -14,12 +14,12 @@ namespace requestHandler
 
 IHandler* Factory::getLoginUser(const Context& ct, IDatabase &db)
 {
-    return new login::Handler(ct.service, ct.completionQueue, db);
+    return new user::login::Handler(ct.service, ct.completionQueue, db);
 }
 
 IHandler* Factory::getRegisterUser(const Context &ct, IDatabase &db)
 {
-    return new register_::Handler(ct.service, ct.completionQueue, db);
+    return new user::register_::Handler(ct.service, ct.completionQueue, db);
 }
 
 } // requestHandler

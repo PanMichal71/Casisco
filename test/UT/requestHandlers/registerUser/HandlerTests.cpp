@@ -12,6 +12,10 @@ namespace server
 {
 namespace requestHandler
 {
+namespace user
+{
+namespace register_
+{
 
 class MockService : public Casisco::AsyncService
 {
@@ -48,6 +52,8 @@ TEST_F(HandlerShould, Test)
     EXPECT_TRUE(true);
 }
 
+} // register_
+} // user
 } // requestHandler
 } // server
 } // casisco

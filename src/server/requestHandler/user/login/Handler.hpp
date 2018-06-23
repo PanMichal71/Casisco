@@ -12,6 +12,8 @@ namespace server
 class IDatabase;
 namespace requestHandler
 {
+namespace user
+{
 namespace login
 {
 
@@ -39,7 +41,8 @@ private:
     EStatus status_;
 };
 
-} //login
+} // login
+} // user
 } // requestHandler
 } // server
 } // casisco

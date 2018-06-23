@@ -6,7 +6,10 @@ namespace casisco
 {
 namespace server
 {
-
+namespace requestHandler
+{
+namespace user
+{
 Database::Database()
     :log_("Database")
 {   
@@ -94,6 +97,7 @@ bool Database::userExists(const std::string &name) const
     return s.ok();
 }
 
-
+} // user
+} // requestHandler
 } // server
 } // casisco

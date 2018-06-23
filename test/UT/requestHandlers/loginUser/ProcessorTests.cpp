@@ -14,6 +14,8 @@ namespace server
 {
 namespace requestHandler
 {
+namespace user
+{
 namespace login
 {
 
@@ -45,6 +47,7 @@ const std::vector<DataType> data = {
 INSTANTIATE_TEST_CASE_P(DbResultPattern, LoginUserProcessorShould, testing::ValuesIn(data),);
 
 } // login
+} // user
 } // requestHandler
 } // server
 } // casisco

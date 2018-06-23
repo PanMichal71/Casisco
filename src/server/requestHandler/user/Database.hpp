@@ -13,7 +13,10 @@ namespace casisco
 {
 namespace server
 {
-
+namespace requestHandler
+{
+namespace user
+{
 class Database : public IDatabase
 {
 public:
@@ -34,5 +37,7 @@ private:
     std::unique_ptr<leveldb::DB> emailsDb_;
 };
 
+} // user
+} // requestHandler
 } // server
 } // casisco

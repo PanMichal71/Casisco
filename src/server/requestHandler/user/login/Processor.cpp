@@ -1,5 +1,5 @@
 #include "Processor.hpp"
-#include "server/IDatabase.hpp"
+#include "server/requestHandler/user/IDatabase.hpp"
 #include "casisco.grpc.pb.h"
 
 #include "unordered_map"
@@ -12,6 +12,8 @@ namespace server
 class IDatabase;
 
 namespace requestHandler
+{
+namespace user
 {
 namespace login
 {
@@ -51,6 +53,7 @@ UserLoginStatus Processor::process(IDatabase &db, UserLoginInfo &request)
 }
 
 } // login
+} // user
 } // requestHandler
 } // server
 } // casisco

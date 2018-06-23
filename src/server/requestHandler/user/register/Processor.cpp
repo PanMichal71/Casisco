@@ -1,5 +1,5 @@
 #include "Processor.hpp"
-#include "server/IDatabase.hpp"
+#include "server/requestHandler/user/IDatabase.hpp"
 #include "casisco.grpc.pb.h"
 namespace casisco
 {
@@ -9,11 +9,13 @@ class IDatabase;
 
 namespace requestHandler
 {
+namespace user
+{
 namespace register_
 {
 
 Processor::Processor()
-    : log_("requestHandler::register_::Processor")
+    : log_("registerUser::Processor")
 {}
 
 UserRegisterStatus Processor::process(IDatabase &db, casisco::UserRegisterInfo &userRegisterInfo)    
@@ -53,6 +55,7 @@ UserRegisterStatus Processor::process(IDatabase &db, casisco::UserRegisterInfo &
 }
 
 } // register_
+} // user
 } // requestHandler
 } // server
 } // casisco

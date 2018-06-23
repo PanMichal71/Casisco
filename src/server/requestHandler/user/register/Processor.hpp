@@ -12,6 +12,8 @@ class IDatabase;
 
 namespace requestHandler
 {
+namespace user
+{
 namespace register_
 {
 
@@ -26,6 +28,7 @@ private:
 };
 
 } // register_
+} // user
 } // requestHandler
 } // server
 } // casisco
