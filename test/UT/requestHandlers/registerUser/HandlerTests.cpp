@@ -1,4 +1,4 @@
-#include "server/requestHandler/registerUser/Handler.hpp"
+#include "server/requestHandler/user/register/Handler.hpp"
 #include "mocks/server/IDatabaseMock.hpp"
 #include "casisco_mock.grpc.pb.h"
 #include <gmock/gmock.h>
@@ -33,10 +33,10 @@ struct HandlerShould : ::testing::Test
     virtual void SetUp () override
     {
         EXPECT_CALL(service_, RequestregisterUser(_, _, _, _, _, _)).Times(1).WillOnce(::testing::SaveArg<1>(&request_));
-        sut_ = std::make_shared<registerUser::Handler>(&service_, nullptr, db_);
+        sut_ = std::make_shared<register_::Handler>(&service_, nullptr, db_);
     }
 
-    std::shared_ptr<registerUser::Handler> sut_;
+    std::shared_ptr<register_::Handler> sut_;
     MockService service_;
     IDatabaseMock db_;
     ::casisco::UserRegisterInfo* request_;

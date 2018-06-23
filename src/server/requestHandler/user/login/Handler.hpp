@@ -1,26 +1,24 @@
 #pragma once
-#include "common/Logger.hpp"
+#include "Logger.hpp"
 #include "server/requestHandler/IHandler.hpp"
 #include "casisco.grpc.pb.h"
 #include <grpc++/grpc++.h>
 
 namespace casisco
 {
+
 namespace server
 {
 class IDatabase;
 namespace requestHandler
 {
-namespace registerUser
+namespace login
 {
 
 class Handler : public IHandler
 {
 public:
-    Handler(Casisco::AsyncService*, grpc::ServerCompletionQueue*, IDatabase &);
-    Handler() = delete;
-    Handler(const Handler&) = delete;
-    Handler(const Handler&&) = delete;
+    Handler(Casisco::AsyncService*, grpc::ServerCompletionQueue*, IDatabase&);
     virtual bool process() override;
 
 private:
@@ -28,8 +26,8 @@ private:
     Casisco::AsyncService* service_;
     grpc::ServerCompletionQueue* cq_;
     grpc::ServerContext ctx_;
-    grpc::ServerAsyncResponseWriter<UserRegisterStatus> responder_;
-    casisco::UserRegisterInfo request_;
+    grpc::ServerAsyncResponseWriter<UserLoginStatus> responder_;
+    UserLoginInfo request_;
     IDatabase& db_;
 
     enum class EStatus
@@ -39,10 +37,9 @@ private:
     };
 
     EStatus status_;
-
 };
 
-} // registerUser
+} //login
 } // requestHandler
 } // server
 } // casisco

@@ -3,12 +3,12 @@ set (SOURCES
 
         #request handlers
         requestHandler/Factory.cpp
-        requestHandler/registerUser/Handler.cpp
-        requestHandler/registerUser/Processor.cpp
-        requestHandler/loginUser/Handler.cpp
-        requestHandler/loginUser/Processor.cpp
-        requestHandler/createProject/Handler.cpp
-        requestHandler/createProject/Processor.cpp
+        requestHandler/user/register/Handler.cpp
+        requestHandler/user/register/Processor.cpp
+        requestHandler/user/login/Handler.cpp
+        requestHandler/user/login/Processor.cpp
+        requestHandler/project/createProject/Handler.cpp
+        requestHandler/project/createProject/Processor.cpp
         requestHandler/Factory.cpp
 
         Database.cpp

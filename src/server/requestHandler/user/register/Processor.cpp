@@ -9,11 +9,11 @@ class IDatabase;
 
 namespace requestHandler
 {
-namespace registerUser
+namespace register_
 {
 
 Processor::Processor()
-    : log_("requestHandler::registerUser::Processor")
+    : log_("requestHandler::register_::Processor")
 {}
 
 UserRegisterStatus Processor::process(IDatabase &db, casisco::UserRegisterInfo &userRegisterInfo)    
@@ -52,7 +52,7 @@ UserRegisterStatus Processor::process(IDatabase &db, casisco::UserRegisterInfo &
     return result;
 }
 
-} // registerUser
+} // register_
 } // requestHandler
 } // server
 } // casisco

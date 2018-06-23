@@ -13,11 +13,11 @@ class IDatabase;
 
 namespace requestHandler
 {
-namespace loginUser
+namespace login
 {
 
 Processor::Processor()
-    : log_("requestHandler::loginUser::Processor")
+    : log_("requestHandler::login::Processor")
 {
 
 }
@@ -50,7 +50,7 @@ UserLoginStatus Processor::process(IDatabase &db, UserLoginInfo &request)
     return result;
 }
 
-} // loginUser
+} // login
 } // requestHandler
 } // server
 } // casisco

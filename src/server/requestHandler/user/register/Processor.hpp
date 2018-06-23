@@ -12,7 +12,7 @@ class IDatabase;
 
 namespace requestHandler
 {
-namespace registerUser
+namespace register_
 {
 
 class Processor
@@ -25,7 +25,7 @@ private:
     common::Logger log_;
 };
 
-} // registerUser
+} // register_
 } // requestHandler
 } // server
 } // casisco

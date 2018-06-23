@@ -1,4 +1,4 @@
-#include "server/requestHandler/loginUser/Processor.hpp"
+#include "server/requestHandler/user/login/Processor.hpp"
 #include "mocks/server/IDatabaseMock.hpp"
 #include "casisco_mock.grpc.pb.h"
 #include <gmock/gmock.h>
@@ -14,7 +14,7 @@ namespace server
 {
 namespace requestHandler
 {
-namespace loginUser
+namespace login
 {
 
 typedef UserLoginStatus::Status StatusType;
@@ -44,7 +44,7 @@ const std::vector<DataType> data = {
 
 INSTANTIATE_TEST_CASE_P(DbResultPattern, LoginUserProcessorShould, testing::ValuesIn(data),);
 
-} // loginUser
+} // login
 } // requestHandler
 } // server
 } // casisco

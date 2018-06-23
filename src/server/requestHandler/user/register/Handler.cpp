@@ -11,11 +11,11 @@ namespace server
 {
 namespace requestHandler
 {
-namespace registerUser
+namespace register_
 {
 
 Handler::Handler(Casisco::AsyncService *service, grpc::ServerCompletionQueue *cq, IDatabase &db)
-    : log_("requestHandler::registerUser::Handler")
+    : log_("requestHandler::register_::Handler")
     , service_(service)
     , cq_(cq)
     , responder_(&ctx_)
@@ -45,7 +45,7 @@ bool Handler::process()
     return true;
 }
 
-} // registerUser
+} // register_
 } // requestHandler
 } // server
 } // casisco

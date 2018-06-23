@@ -1,4 +1,4 @@
-#include "server/requestHandler/registerUser/Processor.hpp"
+#include "server/requestHandler/user/register/Processor.hpp"
 #include "mocks/server/IDatabaseMock.hpp"
 #include "casisco_mock.grpc.pb.h"
 #include <gmock/gmock.h>
@@ -14,7 +14,7 @@ namespace server
 {
 namespace requestHandler
 {
-namespace registerUser
+namespace register_
 {
 typedef UserRegisterStatus::Status StatusType;
 typedef std::pair<IDatabase::Result, UserRegisterStatus_Status> DataType;
@@ -44,7 +44,7 @@ const std::vector<DataType> data = {
 
 INSTANTIATE_TEST_CASE_P(name, ProcessorShould, testing::ValuesIn(data),);
 
-} // registerUser
+} // register_
 } // requestHandler
 } // server
 } // casisco
