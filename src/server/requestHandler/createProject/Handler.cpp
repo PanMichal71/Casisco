@@ -3,33 +3,37 @@
 
 namespace casisco
 {
+
 namespace server
 {
+class IDatabase;
 namespace requestHandler
 {
-namespace loginUser
+namespace createProject
 {
-Handler::Handler(Casisco::AsyncService *service, grpc::ServerCompletionQueue *cq, IDatabase &db)
-    : log_("requestHandler::loginUser::Handler")
+
+Handler::Handler(Casisco::AsyncService *service, grpc::ServerCompletionQueue *cq)
+    : log_("server::requestHandler::createProject::Handler")
     , service_(service)
     , cq_(cq)
     , responder_(&ctx_)
-    , db_(db)
-    , status_(EStatus::processing)
+    , status_(Status::processing)
 {
-    service_->RequestloginUser(&ctx_, &request_, &responder_, cq_, cq_, this);
+    service_->RequestcreateProject(&ctx_, &request_, &responder_, cq_, cq_, this);
 }
+
 
 bool Handler::process()
 {
-    if(status_ == EStatus::processing)
+    if(status_ == Status::processing)
     {
         log_ << DEBUG << "Processing " << this;
         Processor processor;
-        const auto status = processor.process(db_, request_);
+        const auto status = processor.process(request_);
+
         responder_.Finish(status, grpc::Status::OK, this);
-        new Handler (service_, cq_, db_);
-        status_ = EStatus::done;
+        new Handler (service_, cq_);
+        status_ = Status::done;
     }
     else
     {
@@ -39,7 +43,9 @@ bool Handler::process()
     return true;
 }
 
-} // loginUser
+
+} // createProject
 } // requestHandler
 } // server
 } // casisco
+    

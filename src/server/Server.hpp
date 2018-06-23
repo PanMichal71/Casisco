@@ -25,6 +25,7 @@ public:
     void run();
 
 private:
+    common::Logger log_;
     const std::string address_;
     Casisco::AsyncService service_;
     std::unique_ptr<grpc::Server> server_;

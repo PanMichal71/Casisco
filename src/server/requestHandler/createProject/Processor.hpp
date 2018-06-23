@@ -3,29 +3,27 @@
 
 namespace casisco
 {
-class UserRegisterInfo;
-class UserRegisterStatus;
+class ProjectInfo;
+class ReplyStatus;
 
 namespace server
 {
-class IDatabase;
-
 namespace requestHandler
 {
-namespace registerUser
+namespace createProject
 {
 
 class Processor
 {
 public:
     explicit Processor();
-    UserRegisterStatus process(IDatabase& db, casisco::UserRegisterInfo& userRegisterInfo );
+    ReplyStatus process(casisco::ProjectInfo& request );
 
 private:
     common::Logger log_;
 };
 
-} // registerUser
+} // createProject
 } // requestHandler
 } // server
 } // casisco

@@ -1,4 +1,5 @@
 #pragma once
+#include "common/Logger.hpp"
 #include "server/requestHandler/IHandler.hpp"
 #include "casisco.grpc.pb.h"
 #include <grpc++/grpc++.h>
@@ -23,6 +24,7 @@ public:
     virtual bool process() override;
 
 private:
+    common::Logger log_;
     Casisco::AsyncService* service_;
     grpc::ServerCompletionQueue* cq_;
     grpc::ServerContext ctx_;
@@ -30,13 +32,13 @@ private:
     casisco::UserRegisterInfo request_;
     IDatabase& db_;
 
-    enum class Status
+    enum class EStatus
     {
         processing,
         done
     };
 
-    Status status_;
+    EStatus status_;
 
 };
 

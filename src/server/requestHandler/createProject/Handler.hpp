@@ -9,16 +9,15 @@ namespace casisco
 
 namespace server
 {
-class IDatabase;
 namespace requestHandler
 {
-namespace loginUser
+namespace createProject
 {
 
 class Handler : public IHandler
 {
 public:
-    Handler(Casisco::AsyncService*, grpc::ServerCompletionQueue*, IDatabase&);
+    Handler(Casisco::AsyncService*, grpc::ServerCompletionQueue*);
     virtual bool process() override;
 
 private:
@@ -26,20 +25,18 @@ private:
     Casisco::AsyncService* service_;
     grpc::ServerCompletionQueue* cq_;
     grpc::ServerContext ctx_;
-    grpc::ServerAsyncResponseWriter<UserLoginStatus> responder_;
-    UserLoginInfo request_;
-    IDatabase& db_;
+    grpc::ServerAsyncResponseWriter<ReplyStatus> responder_;
+    ProjectInfo request_;
 
-    enum class EStatus
+    enum class Status
     {
         processing,
         done
     };
 
-    EStatus status_;
+    Status status_;
 };
-
-} //loginUser
+} // createProject
 } // requestHandler
 } // server
 } // casisco

@@ -15,33 +15,31 @@ namespace registerUser
 {
 
 Handler::Handler(Casisco::AsyncService *service, grpc::ServerCompletionQueue *cq, IDatabase &db)
-    : service_(service)
+    : log_("requestHandler::registerUser::Handler")
+    , service_(service)
     , cq_(cq)
     , responder_(&ctx_)
     , db_(db)
-    , status_(Status::processing)
+    , status_(EStatus::processing)
 {
     service_->RequestregisterUser(&ctx_, &request_, &responder_, cq_, cq_, this);
 }
 
 bool Handler::process()
 {
-    if(status_ == Status::processing)
+    if(status_ == EStatus::processing)
     {
-        std::cout << "Processing " << this << std::endl;
-        std::cout << "Received name: " << request_.name() << " password: "
-                  << request_.password() << " email: " << request_.email() << std::endl;
-
+        log_ << DEBUG << "Processing " << this;
         Processor processor;
-        const UserRegisterStatus status = processor.process(db_, request_);
+        const auto status = processor.process(db_, request_);
 
         responder_.Finish(status, grpc::Status::OK, this);
         new Handler (service_, cq_, db_);
-        status_ = Status::done;
+        status_ = EStatus::done;
     }
     else
     {
-        std::cout << "Destroying " << this << std::endl;
+        log_ << DEBUG << "Destroying " << this;
         delete this;
     }
     return true;

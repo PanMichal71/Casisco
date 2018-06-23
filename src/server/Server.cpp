@@ -16,7 +16,8 @@ namespace server
 {
 
 Server::Server(const std::string& serverAddress)
-    : address_(serverAddress)
+    : log_("Server")
+    , address_(serverAddress)
 {
     grpc::ServerBuilder builder;
     builder.AddListeningPort(address_, grpc::InsecureServerCredentials());
@@ -40,7 +41,7 @@ void Server::run()
     factory.getRegisterUser(Context{&service_, completionQueue_.get()}, db);
     void* tag;
     bool ok;
-    std::cout << "Listening..."<<std::endl;
+    log_ << INFO << "Listening...";
     while(true)
     {
         GPR_ASSERT(completionQueue_->Next(&tag, &ok));

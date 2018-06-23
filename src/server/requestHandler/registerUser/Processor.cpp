@@ -12,7 +12,11 @@ namespace requestHandler
 namespace registerUser
 {
 
-UserRegisterStatus Processor::process(IDatabase &db, casisco::UserRegisterInfo &userRegisterInfo)
+Processor::Processor()
+    : log_("requestHandler::registerUser::Processor")
+{}
+
+UserRegisterStatus Processor::process(IDatabase &db, casisco::UserRegisterInfo &userRegisterInfo)    
 {
     const UserInfo ui {
         userRegisterInfo.name(),
@@ -36,7 +40,7 @@ UserRegisterStatus Processor::process(IDatabase &db, casisco::UserRegisterInfo &
             status = StatusType::UserRegisterStatus_Status_nameTaken;
             break;
         default:
-            std::cerr << __func__ << " unsupported database result" << std::endl;
+            log_ << ERROR << __func__ << " unsupported database result";
             status = StatusType::UserRegisterStatus_Status_error;
             break;
         }

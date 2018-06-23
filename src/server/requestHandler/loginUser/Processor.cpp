@@ -1,6 +1,10 @@
 #include "Processor.hpp"
 #include "server/IDatabase.hpp"
 #include "casisco.grpc.pb.h"
+
+#include "unordered_map"
+#include <string>
+
 namespace casisco
 {
 namespace server
@@ -13,7 +17,7 @@ namespace loginUser
 {
 
 Processor::Processor()
-    : log_("server::requestHandler::loginUser::Processor")
+    : log_("requestHandler::loginUser::Processor")
 {
 
 }
