@@ -4,11 +4,19 @@ import os
 import shutil
 
 import ServerStub
+import socket
+import time
+from contextlib import closing
 
 import grpc
 from casisco_grpc import casisco_pb2_grpc
 
-
+def find_free_port():
+    with closing(socket.socket(socket.AF_INET, socket.SOCK_STREAM)) as s:
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        s.bind(('', 0))
+        return s.getsockname()[1]
+        
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     outcome = yield
@@ -49,9 +57,11 @@ def cleandir(request):
         shutil.rmtree(tmp_path)
 
     request.addfinalizer(fin)
-
-    stub.run()  
-    yield
+    host = "127.0.0.1"
+    port = find_free_port()
+    address = '{}:{}'.format(host, port)
+    stub.run(host, port)  
+    yield address
     
     if request.node.rep_setup.failed:
         print ("setting up a test failed!", request.node.nodeid)
@@ -66,7 +76,7 @@ def cleandir(request):
 @pytest.yield_fixture()
 def srv(cleandir):
     return casisco_pb2_grpc.CasiscoStub(
-        grpc.insecure_channel('localhost:50051'))
+        grpc.insecure_channel(cleandir))
 
 
 

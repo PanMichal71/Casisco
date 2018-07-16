@@ -30,6 +30,7 @@ Server::~Server()
 {
     server_->Shutdown();
     completionQueue_->Shutdown();
+    log_ << casisco::INFO << "Leaving.";
 }
 
 void Server::run()
@@ -41,7 +42,7 @@ void Server::run()
     factory.getRegisterUser(Context{&service_, completionQueue_.get()}, db);
     void* tag;
     bool ok;
-    log_ << INFO << "Listening...";
+    log_ << INFO << "Listening on: " << address_;
     while(true)
     {
         GPR_ASSERT(completionQueue_->Next(&tag, &ok));

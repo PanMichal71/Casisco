@@ -5,11 +5,14 @@ import subprocess
 import sys
 import socket
 import time
+from contextlib import closing
 
 
 class ServerStub:
     def __init__(self):
         self.process = None
+        self.port = 0
+        self.host = "127.0.0.1"
 
     def save_stdout(self, path):
         with open(path, 'w+') as file:
@@ -39,6 +42,7 @@ class ServerStub:
                 return True
 
     def wait_for_server(self, host, port):
+        print("wait_for_server")
         start = time.time()
         max_time = 10
 
@@ -52,7 +56,7 @@ class ServerStub:
                 print ("Timeout on waiting for server!")
                 return False
 
-            time.sleep(0.25)
+            time.sleep(0.5)
 
     def start_process(self, host, port):
         addr = host+":{}".format(port)
@@ -62,10 +66,11 @@ class ServerStub:
             shell=True, preexec_fn=os.setsid
         )
 
-    def run(self):
-        host = "127.0.0.1"
-        port = 50051
 
-        self.start_process(host, port)
-        assert(self.wait_for_server(host, port) == True)
-            
+
+    def run(self, host, port):
+        self.host = host
+        self.port = port
+
+        self.start_process(self.host, self.port)
+        assert(self.wait_for_server(self.host, self.port) == True)

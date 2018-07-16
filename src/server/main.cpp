@@ -3,13 +3,16 @@
 
 int main (int argc, char** argv)
 {
+    casisco::common::Logger logger("Server");
     if(argc < 2)
     {
-        casisco::common::Logger logger("");
         logger << casisco::ERROR << "Please pass ip address and port in format ip:port";
         return 1;
     }
-    casisco::server::Server server("127.0.0.1:50051");
+    const std::string address {argv[1]};
+
+    casisco::server::Server server(address);
     server.run();
+    
     return 0;
 }
