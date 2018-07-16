@@ -1,5 +1,5 @@
 import pytest
-import ServerStub
+import server_process
 
 import grpc
 from casisco_grpc import casisco_pb2_grpc, casisco_pb2

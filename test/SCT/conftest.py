@@ -3,7 +3,7 @@ import tempfile
 import os
 import shutil
 
-import ServerStub
+import server_process
 import socket
 import time
 from contextlib import closing
@@ -41,7 +41,7 @@ def cleandir(request):
     test_output_dir = os.path.abspath(os.path.join(test_dir, "../../failed_tests_output"))
 
     tmp_path = tempfile.mkdtemp()
-    stub = ServerStub.ServerStub()
+    stub = server_process.server_process()
     os.chdir(tmp_path)
     should_save = 0
     def fin():

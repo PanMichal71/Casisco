@@ -5,10 +5,9 @@ import subprocess
 import sys
 import socket
 import time
-from contextlib import closing
 
 
-class ServerStub:
+class server_process:
     def __init__(self):
         self.process = None
         self.port = 0
@@ -65,8 +64,6 @@ class ServerStub:
             "server_cli.out \"{}\"".format(addr), stdout=subprocess.PIPE, stderr=subprocess.PIPE,
             shell=True, preexec_fn=os.setsid
         )
-
-
 
     def run(self, host, port):
         self.host = host
