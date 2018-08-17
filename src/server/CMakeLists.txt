@@ -2,6 +2,7 @@ protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTO_SRC_DIR} ${PROTOS})
 grpc_generate_cpp(GRPC_SRCS GRPC_HDRS ${PROTO_SRC_DIR} ${PROTOS})
 
 include(Sources.cmake)
+add_subdirectory(database)
 
 add_custom_target(
     AddVirtualKeyword
@@ -17,4 +18,4 @@ add_dependencies(CASISCO AddVirtualKeyword)
 add_executable(server_cli.out main.cpp)
 target_link_libraries(server_cli.out CASISCO)
 
-target_link_libraries(CASISCO gRPC::grpc++_reflection protobuf::libprotobuf common leveldb pthread boost_system boost_filesystem )
+target_link_libraries(CASISCO gRPC::grpc++_reflection protobuf::libprotobuf common CASISCO_DATABASE)

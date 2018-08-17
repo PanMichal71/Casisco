@@ -1,5 +1,5 @@
 #include "Processor.hpp"
-#include "server/requestHandler/user/IDatabase.hpp"
+#include "server/database/IUsersDatabase.hpp"
 #include "casisco.grpc.pb.h"
 namespace casisco
 {
@@ -18,9 +18,9 @@ Processor::Processor()
     : log_("registerUser::Processor")
 {}
 
-UserRegisterStatus Processor::process(IDatabase &db, casisco::UserRegisterInfo &userRegisterInfo)    
+UserRegisterStatus Processor::process(db::IUsersDatabase &db, casisco::UserRegisterInfo &userRegisterInfo)
 {
-    const UserInfo ui {
+    const db::UserInfo ui {
         userRegisterInfo.name(),
         userRegisterInfo.password(),
         userRegisterInfo.email()
@@ -32,13 +32,13 @@ UserRegisterStatus Processor::process(IDatabase &db, casisco::UserRegisterInfo &
         UserRegisterStatus_Status status;
         switch(db.registerUser(ui) )
         {
-        case IDatabase::Result::ok:
+        case db::EResult::ok:
             status = StatusType::UserRegisterStatus_Status_ok;
             break;
-        case IDatabase::Result::wrongEmail:
+        case db::EResult::error:
             status = StatusType::UserRegisterStatus_Status_emailTaken;
             break;
-        case IDatabase::Result::loginTaken:
+        case db::EResult::alreadyExists:
             status = StatusType::UserRegisterStatus_Status_nameTaken;
             break;
         default:

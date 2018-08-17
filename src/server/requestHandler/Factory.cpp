@@ -12,12 +12,12 @@ namespace server
 namespace requestHandler
 {
 
-IHandler* Factory::getLoginUser(const Context& ct, IDatabase &db)
+IHandler* Factory::getLoginUser(const Context& ct, db::IUsersDatabase &db)
 {
     return new user::login::Handler(ct.service, ct.completionQueue, db);
 }
 
-IHandler* Factory::getRegisterUser(const Context &ct, IDatabase &db)
+IHandler* Factory::getRegisterUser(const Context &ct, db::IUsersDatabase &db)
 {
     return new user::register_::Handler(ct.service, ct.completionQueue, db);
 }

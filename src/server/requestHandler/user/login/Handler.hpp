@@ -9,7 +9,11 @@ namespace casisco
 
 namespace server
 {
-class IDatabase;
+namespace db
+{
+class IUsersDatabase;
+} // namespace db
+
 namespace requestHandler
 {
 namespace user
@@ -20,7 +24,7 @@ namespace login
 class Handler : public IHandler
 {
 public:
-    Handler(Casisco::AsyncService*, grpc::ServerCompletionQueue*, IDatabase&);
+    Handler(Casisco::AsyncService*, grpc::ServerCompletionQueue*, db::IUsersDatabase&);
     virtual bool process() override;
 
 private:
@@ -30,7 +34,7 @@ private:
     grpc::ServerContext ctx_;
     grpc::ServerAsyncResponseWriter<UserLoginStatus> responder_;
     UserLoginInfo request_;
-    IDatabase& db_;
+    db::IUsersDatabase& db_;
 
     enum class EStatus
     {

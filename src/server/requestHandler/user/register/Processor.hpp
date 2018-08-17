@@ -8,7 +8,10 @@ class UserRegisterStatus;
 
 namespace server
 {
-class IDatabase;
+namespace db
+{
+class IUsersDatabase;
+} // namespace db
 
 namespace requestHandler
 {
@@ -21,7 +24,7 @@ class Processor
 {
 public:
     explicit Processor();
-    UserRegisterStatus process(IDatabase& db, casisco::UserRegisterInfo& userRegisterInfo );
+    UserRegisterStatus process(db::IUsersDatabase& db, casisco::UserRegisterInfo& userRegisterInfo );
 
 private:
     common::Logger log_;

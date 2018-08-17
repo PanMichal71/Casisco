@@ -19,12 +19,12 @@ namespace user
 namespace register_
 {
 typedef UserRegisterStatus::Status StatusType;
-typedef std::pair<IDatabase::Result, UserRegisterStatus_Status> DataType;
+typedef std::pair<db::EResult, UserRegisterStatus_Status> DataType;
 
 struct ProcessorShould : ::testing::TestWithParam<DataType>
 {
     Processor sut_;
-    IDatabaseMock dbMock_;
+    db::UsersDatabaseMock dbMock_;
 };
 
 TEST_P(ProcessorShould, setStatusOkIfSucceded)
@@ -38,10 +38,9 @@ TEST_P(ProcessorShould, setStatusOkIfSucceded)
 }
 
 const std::vector<DataType> data = {
-    std::make_pair(IDatabase::Result::ok, StatusType::UserRegisterStatus_Status_ok),
-    std::make_pair(IDatabase::Result::wrongEmail, StatusType::UserRegisterStatus_Status_emailTaken),
-    std::make_pair(IDatabase::Result::loginTaken, StatusType::UserRegisterStatus_Status_nameTaken),
-    std::make_pair(IDatabase::Result::failedToLogin, StatusType::UserRegisterStatus_Status_error)
+    std::make_pair(db::EResult::ok, StatusType::UserRegisterStatus_Status_ok),
+    std::make_pair(db::EResult::error, StatusType::UserRegisterStatus_Status_emailTaken),
+    std::make_pair(db::EResult::alreadyExists, StatusType::UserRegisterStatus_Status_nameTaken)
 };
 
 INSTANTIATE_TEST_CASE_P(name, ProcessorShould, testing::ValuesIn(data),);

@@ -20,12 +20,12 @@ namespace login
 {
 
 typedef UserLoginStatus::Status StatusType;
-typedef std::pair<IDatabase::Result, UserLoginStatus_Status> DataType;
+typedef std::pair<db::EResult, UserLoginStatus_Status> DataType;
 
 struct LoginUserProcessorShould : ::testing::TestWithParam<DataType>
 {
     Processor sut_;
-    IDatabaseMock dbMock_;
+    db::UsersDatabaseMock dbMock_;
 };
 
 TEST_P(LoginUserProcessorShould, setStatusOkIfSucceded)
@@ -39,9 +39,8 @@ TEST_P(LoginUserProcessorShould, setStatusOkIfSucceded)
 }
 
 const std::vector<DataType> data = {
-    std::make_pair(IDatabase::Result::ok, StatusType::UserLoginStatus_Status_ok),
-    std::make_pair(IDatabase::Result::failedToLogin, StatusType::UserLoginStatus_Status_error),
-    std::make_pair(IDatabase::Result::error, StatusType::UserLoginStatus_Status_error)
+    std::make_pair(db::EResult::ok, StatusType::UserLoginStatus_Status_ok),
+    std::make_pair(db::EResult::error, StatusType::UserLoginStatus_Status_error)
 };
 
 INSTANTIATE_TEST_CASE_P(DbResultPattern, LoginUserProcessorShould, testing::ValuesIn(data),);

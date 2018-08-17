@@ -42,7 +42,7 @@ struct HandlerShould : ::testing::Test
 
     std::shared_ptr<register_::Handler> sut_;
     MockService service_;
-    IDatabaseMock db_;
+    db::UsersDatabaseMock db_;
     ::casisco::UserRegisterInfo* request_;
 };
 

@@ -1,6 +1,9 @@
 #python test generated files
 test/SCT/casisco_grpc/
 
+#pip files
+Pipfile*
+
 #failed tests output dir
 failed_tests_output
 

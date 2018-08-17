@@ -8,7 +8,10 @@ namespace casisco
 {
 namespace server
 {
-class IDatabase;
+namespace db
+{
+class IUsersDatabase;
+} // namespace db
 namespace requestHandler
 {
 namespace user
@@ -19,7 +22,7 @@ namespace register_
 class Handler : public IHandler
 {
 public:
-    Handler(Casisco::AsyncService*, grpc::ServerCompletionQueue*, IDatabase &);
+    Handler(Casisco::AsyncService*, grpc::ServerCompletionQueue*, db::IUsersDatabase &);
     Handler() = delete;
     Handler(const Handler&) = delete;
     Handler(const Handler&&) = delete;
@@ -32,7 +35,7 @@ private:
     grpc::ServerContext ctx_;
     grpc::ServerAsyncResponseWriter<UserRegisterStatus> responder_;
     casisco::UserRegisterInfo request_;
-    IDatabase& db_;
+    db::IUsersDatabase& db_;
 
     enum class EStatus
     {

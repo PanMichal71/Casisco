@@ -1,7 +1,7 @@
 #include "Handler.hpp"
 #include "Processor.hpp"
 
-#include "server/requestHandler/user/IDatabase.hpp"
+#include "server/database/IUsersDatabase.hpp"
 
 namespace casisco
 {
@@ -14,7 +14,7 @@ namespace user
 namespace register_
 {
 
-Handler::Handler(Casisco::AsyncService *service, grpc::ServerCompletionQueue *cq, IDatabase &db)
+Handler::Handler(Casisco::AsyncService *service, grpc::ServerCompletionQueue *cq, db::IUsersDatabase &db)
     : log_("registerUser::Handler")
     , service_(service)
     , cq_(cq)

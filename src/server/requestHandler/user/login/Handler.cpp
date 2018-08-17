@@ -11,7 +11,7 @@ namespace user
 {
 namespace login
 {
-Handler::Handler(Casisco::AsyncService *service, grpc::ServerCompletionQueue *cq, IDatabase &db)
+Handler::Handler(Casisco::AsyncService *service, grpc::ServerCompletionQueue *cq, db::IUsersDatabase &db)
     : log_("requestHandler::login::Handler")
     , service_(service)
     , cq_(cq)

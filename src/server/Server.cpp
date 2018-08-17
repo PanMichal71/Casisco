@@ -5,7 +5,7 @@
 
 #include "requestHandler/Factory.hpp"
 #include "requestHandler/IHandler.hpp"
-#include "requestHandler/user/Database.hpp"
+#include "database/Database.hpp"
 #include "Context.hpp"
 #include <iostream>
 #include <thread>
@@ -36,10 +36,10 @@ Server::~Server()
 void Server::run()
 {
     requestHandler::Factory factory;
-    requestHandler::user::Database db;
-    db.init();
-    factory.getLoginUser(Context{&service_, completionQueue_.get()}, db);
-    factory.getRegisterUser(Context{&service_, completionQueue_.get()}, db);
+    db::Database database;
+    database.init();
+    factory.getLoginUser(Context{&service_, completionQueue_.get()}, database);
+    factory.getRegisterUser(Context{&service_, completionQueue_.get()}, database);
     void* tag;
     bool ok;
     log_ << INFO << "Listening on: " << address_;

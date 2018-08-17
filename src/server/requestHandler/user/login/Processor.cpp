@@ -1,5 +1,5 @@
 #include "Processor.hpp"
-#include "server/requestHandler/user/IDatabase.hpp"
+#include "server/database/IUsersDatabase.hpp"
 #include "casisco.grpc.pb.h"
 
 #include "unordered_map"
@@ -24,9 +24,9 @@ Processor::Processor()
 
 }
 
-UserLoginStatus Processor::process(IDatabase &db, UserLoginInfo &request)
+UserLoginStatus Processor::process(db::IUsersDatabase &db, UserLoginInfo &request)
 {
-    const UserInfo ui {
+    const db::UserInfo ui {
         request.name(),
         request.password()
     };
@@ -37,7 +37,7 @@ UserLoginStatus Processor::process(IDatabase &db, UserLoginInfo &request)
         UserLoginStatus_Status status;
         switch(db.loginUser(ui) )
         {
-        case IDatabase::Result::ok:
+        case db::EResult::ok:
             status = StatusType::UserLoginStatus_Status_ok;
             break;
         default:
