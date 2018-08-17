@@ -3,6 +3,7 @@ test/SCT/casisco_grpc/
 
 #pip files
 Pipfile*
+venv/
 
 #failed tests output dir
 failed_tests_output
