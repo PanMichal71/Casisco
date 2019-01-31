@@ -7,9 +7,11 @@ service Casisco
 	rpc registerUser(UserRegisterInfo) returns (UserRegisterStatus) {}
 	rpc loginUser(UserLoginInfo) 	   returns (UserLoginStatus) {}
 	
-	rpc createProject(ProjectInfo) 		 returns (ReplyStatus) {}
+	rpc createProject(ProjectInfo)               returns (ReplyStatus) {}
+	rpc sendData(stream ProjectBinaryData)       returns (ReplyStatus) {}
+
 	rpc getAlgorithmFile(ProjectInfo)    returns (AlgorithmFileReply) {}
-	rpc getPartData(ProjectInfo) 		 returns (PartDataReply) {}
+	rpc getPartData(ProjectInfo) 	     returns (PartDataReply) {}
 	rpc sendPartialResult(PartialResult) returns (ReplyStatus) {}
 };
 
@@ -57,8 +59,12 @@ message ProjectInfo
 {
 	string name   = 1;
 	string author = 2;
-	bytes  data   = 3;
-	bytes  binaryFile = 4;
+};
+
+message ProjectBinaryData
+{
+	bytes binaryFile = 1;
+	bytes data       = 2;
 };
 
 message AlgorithmFileReply
@@ -67,7 +73,7 @@ message AlgorithmFileReply
 	bytes  binaryFile = 2;
 	enum Status
 	{
-		ok 	  = 0;
+		ok    = 0;
 		error = 1;
 	}
 	Status status = 3;
@@ -80,7 +86,7 @@ message PartDataReply
 	bytes data   = 3;
 	enum Status
 	{
-		ok 	  = 0;
+		ok    = 0;
 		error = 1;
 	}
 	Status status = 4;
@@ -97,7 +103,7 @@ message ReplyStatus
 {
 	enum Status
 	{
-		ok 	  = 0;
+		ok    = 0;
 		error = 1;
 	}
 	Status status = 1;

@@ -6,22 +6,21 @@ namespace casisco
 
 namespace server
 {
-class IDatabase;
 namespace requestHandler
 {
 namespace createProject
 {
 
-Handler::Handler(Casisco::AsyncService *service, grpc::ServerCompletionQueue *cq)
+Handler::Handler(Casisco::AsyncService *service, grpc::ServerCompletionQueue *cq, db::IProjectsDatabase &db)
     : log_("server::requestHandler::createProject::Handler")
     , service_(service)
     , cq_(cq)
     , responder_(&ctx_)
+    , db_(db)
     , status_(Status::processing)
 {
     service_->RequestcreateProject(&ctx_, &request_, &responder_, cq_, cq_, this);
 }
-
 
 bool Handler::process()
 {
@@ -29,10 +28,10 @@ bool Handler::process()
     {
         log_ << DEBUG << "Processing " << this;
         Processor processor;
-        const auto status = processor.process(request_);
+        const auto status = processor.process(db_, request_);
 
         responder_.Finish(status, grpc::Status::OK, this);
-        new Handler (service_, cq_);
+        new Handler (service_, cq_, db_);
         status_ = Status::done;
     }
     else

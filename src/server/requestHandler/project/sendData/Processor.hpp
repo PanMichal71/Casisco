@@ -13,7 +13,7 @@ class IProjectsDatabase;
 } // namespace db
 namespace requestHandler
 {
-namespace createProject
+namespace sendData
 {
 
 class Processor
@@ -22,7 +22,7 @@ public:
     ReplyStatus process(db::IProjectsDatabase& db, casisco::ProjectInfo& request);
 };
 
-} // createProject
+} // sendData
 } // requestHandler
 } // server
 } // casisco

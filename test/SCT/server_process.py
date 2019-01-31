@@ -19,6 +19,8 @@ class server_process:
                 file.write("%s\n" % line.strip())
                 print("{}".format(line.strip()))
 
+                #TODO save stderr as well
+
     def cleanup(self):
          if(self.process != None):
             print ("Killing server process: {}".format(self.process.pid))

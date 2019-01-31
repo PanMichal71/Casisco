@@ -48,6 +48,16 @@ class TestDatabaseInteraction:
         self.login_user_and_expect_status(
             srv, self.name, self.password, self.success)
 
+    def make_message(self):
+        yield casisco_pb2.ProjectBinaryData(
+            binaryFile = "987654321",
+            data = "123456789"
+        )
+
+    def test_send_data_and_binary_file(self, srv):
+        status = casisco_pb2.ReplyStatus()
+        status.status = self.success
+        result = srv.sendData(self.make_message())
 
 
 

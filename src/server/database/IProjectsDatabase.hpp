@@ -12,6 +12,7 @@ namespace db
 struct ProjectInfo
 {
     std::string name;
+    std::string author;
 };
 
 class IProjectsDatabase

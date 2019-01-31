@@ -11,11 +11,11 @@ namespace server
 {
 namespace requestHandler
 {
-namespace createProject
+namespace sendData
 {
 namespace
 {
-common::Logger log("requestHandler::createProject::Processor");
+common::Logger log("requestHandler::sendData::Processor");
 } // namespace
 
 ReplyStatus Processor::process( db::IProjectsDatabase &db, ProjectInfo &request)
@@ -45,7 +45,7 @@ ReplyStatus Processor::process( db::IProjectsDatabase &db, ProjectInfo &request)
     return result;
 }
 
-} // createProject
+} // sendData
 } // requestHandler
 } // server
 } // casisco

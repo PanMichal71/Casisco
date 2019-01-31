@@ -30,12 +30,12 @@ bool Handler::process()
         Processor processor;
         const auto status = processor.process(db_, request_);
         responder_.Finish(status, grpc::Status::OK, this);
-        new Handler (service_, cq_, db_);
         status_ = EStatus::done;
     }
     else
     {
         log_ << DEBUG << "Destroying " << this;
+        new Handler (service_, cq_, db_);
         delete this;
     }
     return true;

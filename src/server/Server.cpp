@@ -38,15 +38,18 @@ void Server::run()
     requestHandler::Factory factory;
     db::Database database;
     database.init();
-    factory.getLoginUser(Context{&service_, completionQueue_.get()}, database);
-    factory.getRegisterUser(Context{&service_, completionQueue_.get()}, database);
+    const auto ctx = Context{&service_, completionQueue_.get()};
+    factory.getLoginUser(ctx, database);
+    factory.getRegisterUser(ctx, database);
+    factory.getSendData(ctx);
     void* tag;
     bool ok;
     log_ << INFO << "Listening on: " << address_;
     while(true)
     {
         GPR_ASSERT(completionQueue_->Next(&tag, &ok));
-        GPR_ASSERT(ok);
+        log_ << INFO << "Processing " << tag;
+//        GPR_ASSERT(ok); // odkomentowac trzeba
         static_cast<requestHandler::IHandler*>(tag)->process();
     }
 }

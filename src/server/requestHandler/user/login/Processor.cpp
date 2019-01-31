@@ -9,8 +9,6 @@ namespace casisco
 {
 namespace server
 {
-class IDatabase;
-
 namespace requestHandler
 {
 namespace user
@@ -35,7 +33,7 @@ UserLoginStatus Processor::process(db::IUsersDatabase &db, UserLoginInfo &reques
     {
         typedef UserLoginStatus::Status StatusType;
         UserLoginStatus_Status status;
-        switch(db.loginUser(ui) )
+        switch(db.loginUser(ui))
         {
         case db::EResult::ok:
             status = StatusType::UserLoginStatus_Status_ok;

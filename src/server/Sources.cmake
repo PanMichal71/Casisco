@@ -11,6 +11,9 @@ set (SOURCES
         requestHandler/project/createProject/Handler.cpp
         requestHandler/project/createProject/Processor.cpp
 
+        requestHandler/project/sendData/Handler.cpp
+        requestHandler/project/sendData/Processor.cpp
+
         requestHandler/Factory.cpp
 
     )

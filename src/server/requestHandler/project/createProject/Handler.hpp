@@ -9,6 +9,11 @@ namespace casisco
 
 namespace server
 {
+namespace db
+{
+class IProjectsDatabase;
+} // namespace db
+
 namespace requestHandler
 {
 namespace createProject
@@ -17,7 +22,7 @@ namespace createProject
 class Handler : public IHandler
 {
 public:
-    Handler(Casisco::AsyncService*, grpc::ServerCompletionQueue*);
+    Handler(Casisco::AsyncService*, grpc::ServerCompletionQueue*, db::IProjectsDatabase& db);
     virtual bool process() override;
 
 private:
@@ -27,6 +32,7 @@ private:
     grpc::ServerContext ctx_;
     grpc::ServerAsyncResponseWriter<ReplyStatus> responder_;
     ProjectInfo request_;
+    db::IProjectsDatabase& db_;
 
     enum class Status
     {
